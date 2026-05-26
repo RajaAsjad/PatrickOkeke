@@ -442,7 +442,7 @@ $(document).ready(function() {
 			text: "You won't be able to revert this!",
 			icon: 'warning',
 			showCancelButton: true,
-			confirmButtonColor: '#ec4899',
+			confirmButtonColor: '#a85a32',
 			cancelButtonColor: '#6b7280',
 			confirmButtonText: 'Yes, delete it!'
 		}).then(function(result) {

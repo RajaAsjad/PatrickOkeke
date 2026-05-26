@@ -26,10 +26,13 @@
         <link rel="icon" href="{{ asset('admin/assets/images/page/' . $adminFav) }}"
             @if ($adminFavMime !== '') type="{{ $adminFavMime }}" @endif sizes="32x32">
     @else
-        <link rel="icon" href="{{ asset('assets/website/favicon-la.svg') }}" type="image/svg+xml"
+        <link rel="icon" href="{{ asset('assets/website/favicon-po.svg') }}" type="image/svg+xml"
             sizes="any">
-        <link rel="apple-touch-icon" href="{{ asset('assets/website/favicon-la.svg') }}">
+        <link rel="apple-touch-icon" href="{{ asset('assets/website/favicon-po.svg') }}">
     @endif
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/ionicons.min.css') }}">
@@ -44,6 +47,7 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/patrick-admin-theme.css') }}">
 
     <style>
         label {
@@ -59,7 +63,7 @@
         .skin-blue .main-sidebar,
         .content-header .content-header-right a,
         .content .form-horizontal .btn-success {
-            /*  background-color: #000000!important; */
+             background-color: #2c2419 !important;
             /* background-image: url('{{ asset("assets/website/images/login.png") }}');
             background-size: cover;
             background-position: center; */
@@ -99,20 +103,20 @@
         }
 
         .content a:not(.btn):not(.paginate_button):hover {
-            color: #9d174d !important;
+            color: var(--admin-pink-deep) !important;
         }
 
         a.btn.btn-primary.btn-sm:hover {
             color: #fff !important;
-            background: linear-gradient(135deg, var(--admin-pink) 0%, var(--admin-orange) 100%) !important;
-            border-color: rgba(236, 72, 153, 0.4) !important;
+            background: var(--admin-gradient) !important;
+            border-color: rgba(168, 90, 50, 0.4) !important;
             font-weight: 700;
         }
 
         button.btn.btn-success.pull-left:hover {
             color: #fff !important;
-            background: linear-gradient(135deg, var(--admin-pink) 0%, var(--admin-orange) 100%) !important;
-            border-color: rgba(236, 72, 153, 0.4) !important;
+            background: var(--admin-gradient) !important;
+            border-color: rgba(168, 90, 50, 0.4) !important;
         }
 
         .content-header>h1,
@@ -127,7 +131,7 @@
 
         .main-header .navbar .nav>li>a:hover,
         .main-header .navbar .nav .open>a {
-            background-color: rgba(236, 72, 153, 0.18) !important;
+            background-color: rgba(168, 90, 50, 0.2) !important;
         }
 
         .navbar-nav>.user-menu>.dropdown-menu>.user-footer {
@@ -136,17 +140,17 @@
 
         .navbar-nav>.user-menu>.dropdown-menu>.user-footer .btn-default {
             color: #fff !important;
-            background: linear-gradient(135deg, var(--admin-pink) 0%, var(--admin-orange) 100%) !important;
+            background: var(--admin-gradient) !important;
             border: none !important;
             border-radius: 30px !important;
         }
 
         .navbar-nav>.user-menu>.dropdown-menu>.user-footer .btn-default:hover {
             color: #fff !important;
-            background: linear-gradient(135deg, #db2777 0%, #ea580c 100%) !important;
+            background: var(--admin-gradient-hover) !important;
             border-radius: 30px !important;
             transition: all 0.25s ease-in-out !important;
-            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.35) !important;
+            box-shadow: 0 0 0 3px rgba(168, 90, 50, 0.35) !important;
         }
 
         .box.box-info {
@@ -158,24 +162,24 @@
         }
 
         a.active {
-            background: linear-gradient(135deg, var(--admin-pink) 0%, var(--admin-orange) 100%) !important;
+            background: var(--admin-gradient) !important;
             color: #fff !important;
             font-weight: 700;
         }
 
         .btn-active {
             color: #fff !important;
-            background: linear-gradient(135deg, var(--admin-pink) 0%, var(--admin-orange) 100%) !important;
-            border-color: rgba(236, 72, 153, 0.45) !important;
+            background: var(--admin-gradient) !important;
+            border-color: rgba(168, 90, 50, 0.45) !important;
             font-weight: 600;
             transition: all 0.25s ease-in-out;
         }
 
         .btn-active:hover {
             color: #fff !important;
-            background: linear-gradient(135deg, #db2777 0%, #ea580c 100%) !important;
-            border-color: rgba(236, 72, 153, 0.55) !important;
-            box-shadow: 0 4px 14px rgba(236, 72, 153, 0.3);
+            background: var(--admin-gradient-hover) !important;
+            border-color: rgba(168, 90, 50, 0.55) !important;
+            box-shadow: 0 4px 14px rgba(168, 90, 50, 0.3);
         }
 
         .info-box {
@@ -186,12 +190,12 @@
             box-shadow: 0 8px 24px rgba(28, 25, 23, 0.12);
             border-radius: 8px;
             margin-bottom: 15px;
-            border: 1px solid rgba(236, 72, 153, 0.12);
+            border: 1px solid var(--admin-border);
         }
 
         .info-box:hover {
             background: linear-gradient(135deg, #292524 0%, var(--admin-shell-soft) 100%) !important;
-            box-shadow: 0 10px 28px rgba(236, 72, 153, 0.15);
+            box-shadow: 0 10px 28px rgba(44, 36, 25, 0.12);
         }
 
         .info-box-content {
@@ -200,15 +204,15 @@
         }
 
         .info-box-icon {
-            background: linear-gradient(135deg, var(--admin-pink) 0%, var(--admin-orange) 100%) !important;
+            background: var(--admin-gradient) !important;
         }
 
         .info-box-text {
-            color: rgba(251, 146, 60, 0.95) !important;
+            color: rgba(196, 165, 116, 0.95) !important;
         }
 
         .info-box-number {
-            color: #fce7f3 !important;
+            color: #f7f4ee !important;
         }
 
         span.info-box-icon i {
@@ -224,7 +228,7 @@
         }
 
         .skin-blue .sidebar-menu>li:hover>a {
-            background: rgba(236, 72, 153, 0.22) !important;
+            background: rgba(168, 90, 50, 0.18) !important;
         }
 
         .skin-blue .sidebar-menu>li>.treeview-menu {
@@ -247,14 +251,14 @@
         .pagination>.active>span {
             z-index: 3;
             color: #fff !important;
-            background: linear-gradient(135deg, var(--admin-pink) 0%, var(--admin-orange) 100%) !important;
-            border-color: rgba(236, 72, 153, 0.45);
+            background: var(--admin-gradient) !important;
+            border-color: rgba(168, 90, 50, 0.45);
         }
 
         .pagination>.active>span:hover {
             z-index: 3;
             color: #fff !important;
-            background: linear-gradient(135deg, #db2777 0%, #ea580c 100%) !important;
+            background: var(--admin-gradient-hover) !important;
             border-color: rgba(219, 39, 119, 0.55);
         }
 
@@ -262,7 +266,7 @@
             z-index: 2;
             color: #fff !important;
             background: linear-gradient(135deg, var(--admin-pink-deep) 0%, #ea580c 100%);
-            border-color: rgba(236, 72, 153, 0.4);
+            border-color: rgba(168, 90, 50, 0.4);
         }
 
         .pagination>li>a {
@@ -285,7 +289,7 @@
         .modal-header {
             padding: 15px;
             background: linear-gradient(180deg, #fff 0%, var(--admin-cream) 100%);
-            border-bottom: 2px solid rgba(236, 72, 153, 0.35);
+            border-bottom: 2px solid rgba(168, 90, 50, 0.35);
         }
     </style>
 

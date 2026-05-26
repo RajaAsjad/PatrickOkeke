@@ -11,7 +11,7 @@
 		overflow: hidden;
 	}
 	.contact-detail-header {
-		background: linear-gradient(135deg, #ec4899 0%, #db2777 50%, #ea580c 100%) !important;
+		background: linear-gradient(135deg, var(--admin-pink) 0%, var(--admin-pink-deep) 50%, #ea580c 100%) !important;
 		color: #fff;
 		padding: 18px 30px;
 		border-radius: 16px 16px 0 0;
@@ -57,7 +57,7 @@
 	}
 	.contact-detail-table tr:hover td { background: rgba(236, 72, 153, 0.05); }
 	.btn-view-all {
-		background: #ec4899 !important;
+		background: var(--admin-pink) !important;
 		color: #fff !important;
 		border: none;
 		padding: 10px 24px;

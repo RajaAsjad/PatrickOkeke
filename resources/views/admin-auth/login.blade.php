@@ -6,9 +6,9 @@
     <div class="admin-auth-portal">
         <div class="admin-auth-card">
             <header class="admin-auth-card__header">
-                <span class="admin-auth-card__mark" aria-hidden="true">LA</span>
+                <span class="admin-auth-card__mark" aria-hidden="true">PO</span>
                 <div class="admin-auth-card__titles">
-                    <h1 class="admin-auth-card__name">Lyllianna Aguayo</h1>
+                    <h1 class="admin-auth-card__name">Patrick Okeke</h1>
                     <p class="admin-auth-card__panel">Admin Panel</p>
                 </div>
             </header>
@@ -44,6 +44,10 @@
 
                 <button type="submit" class="admin-auth-submit">{{ __('Login') }}</button>
             </form>
+
+            <p class="admin-auth-foot">
+                <a href="{{ route('index') }}" target="_blank" rel="noopener">← Back to website</a>
+            </p>
         </div>
     </div>
 @endsection

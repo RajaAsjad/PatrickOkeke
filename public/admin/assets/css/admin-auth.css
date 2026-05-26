@@ -1,0 +1,223 @@
+/* Patrick Okeke — admin login & auth pages (matches public author site) */
+:root {
+    --auth-surface: #f7f4ee;
+    --auth-card: #fdfcfa;
+    --auth-ink: #2c2419;
+    --auth-muted: #6b5f52;
+    --auth-accent: #a85a32;
+    --auth-accent-dark: #7a3d24;
+    --auth-border: rgba(44, 36, 25, 0.12);
+    --auth-font-display: 'Fraunces', Georgia, serif;
+    --auth-font-body: 'Inter', system-ui, sans-serif;
+}
+
+body.hold-transition.login-page {
+    min-height: 100vh;
+    font-family: var(--auth-font-body);
+    background-color: var(--auth-surface);
+    background-image:
+        linear-gradient(180deg, #faf7f2 0%, #f0ebe3 100%),
+        radial-gradient(ellipse 85% 55% at 75% 15%, rgba(168, 90, 50, 0.1) 0%, transparent 58%),
+        radial-gradient(ellipse 55% 45% at 12% 85%, rgba(44, 36, 25, 0.06) 0%, transparent 52%);
+    background-attachment: fixed;
+}
+
+body.login-page::after {
+    display: none;
+}
+
+.admin-auth-portal {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.admin-auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--auth-card);
+    border: 1px solid var(--auth-border);
+    border-radius: 8px;
+    box-shadow: 0 24px 48px -16px rgba(44, 36, 25, 0.18);
+    padding: 2rem 1.75rem 2.25rem;
+}
+
+.admin-auth-card__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--auth-border);
+}
+
+.admin-auth-card__mark {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--auth-font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--auth-surface);
+    border-radius: 6px;
+    background: var(--auth-ink);
+    box-shadow: 0 4px 12px rgba(44, 36, 25, 0.2);
+}
+
+.admin-auth-card__name {
+    font-family: var(--auth-font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--auth-ink);
+    letter-spacing: -0.02em;
+    margin: 0 0 0.2rem;
+    line-height: 1.15;
+}
+
+.admin-auth-card__panel {
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--auth-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.admin-auth-form {
+    margin: 0;
+}
+
+.admin-auth-field {
+    margin-bottom: 1.1rem;
+}
+
+.admin-auth-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--auth-muted);
+    margin-bottom: 0.35rem;
+}
+
+.admin-auth-input {
+    width: 100%;
+    padding: 0.65rem 0;
+    font-size: 0.9375rem;
+    font-family: var(--auth-font-body);
+    border: none;
+    border-bottom: 1px solid var(--auth-border);
+    border-radius: 0;
+    background: transparent;
+    color: var(--auth-ink);
+    transition: border-color 0.2s ease;
+}
+
+.admin-auth-input::placeholder {
+    color: #9c8f82;
+}
+
+.admin-auth-input:focus {
+    outline: none;
+    border-color: var(--auth-accent);
+}
+
+.admin-auth-error {
+    display: block;
+    font-size: 0.78rem;
+    color: #b91c1c;
+    margin-top: 0.35rem;
+}
+
+.admin-auth-options {
+    margin: 0.25rem 0 1.25rem;
+}
+
+.admin-auth-remember {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8125rem;
+    color: var(--auth-muted);
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+}
+
+.admin-auth-remember input {
+    accent-color: var(--auth-accent);
+    cursor: pointer;
+}
+
+.admin-auth-submit {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--auth-font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--auth-surface);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    background: var(--auth-ink);
+    transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.admin-auth-submit:hover {
+    background: var(--auth-accent-dark);
+    transform: translateY(-1px);
+}
+
+.admin-auth-submit:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(168, 90, 50, 0.25);
+}
+
+.admin-auth-foot {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.8125rem;
+}
+
+.admin-auth-foot a {
+    color: var(--auth-accent);
+    border-bottom: 1px solid color-mix(in oklab, var(--auth-accent) 40%, transparent);
+}
+
+.login-page .login-box {
+    width: 100%;
+    max-width: 440px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.login-page .login-box .login-logo {
+    color: var(--auth-ink);
+    font-family: var(--auth-font-display);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.login-page .login-box-body {
+    background: var(--auth-card);
+    border: 1px solid var(--auth-border);
+    border-radius: 8px;
+    padding: 1.5rem 1.25rem;
+    box-shadow: 0 24px 48px -16px rgba(44, 36, 25, 0.18);
+}
+
+@media (max-width: 400px) {
+    .admin-auth-card {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .admin-auth-card__name {
+        font-size: 1.2rem;
+    }
+}

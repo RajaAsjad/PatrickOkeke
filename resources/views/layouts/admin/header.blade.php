@@ -1,13 +1,13 @@
 <header class="main-header admin-header">
-    <a href="{{ route('dashboard') }}" class="header-logo-link" aria-label="Lyllianna Aguayo home">
+    <a href="{{ route('dashboard') }}" class="header-logo-link" aria-label="Patrick Okeke home">
         @if (!empty($home_page_data['header_logo']))
             <img id="header-logo" class="admin-header-logo-img"
                 src="{{ asset('admin/assets/images/page/' . $home_page_data['header_logo']) }}"
-                alt="Lyllianna Aguayo">
+                alt="Patrick Okeke">
         @else
             <span class="admin-header-logo-fallback">
-                <span class="admin-header__mark" aria-hidden="true">LA</span>
-                <span class="admin-header__name">Lyllianna Aguayo</span>
+                <span class="admin-header__mark" aria-hidden="true">PO</span>
+                <span class="admin-header__name">Patrick Okeke</span>
             </span>
         @endif
     </a>
@@ -96,12 +96,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: Georgia, 'Times New Roman', serif;
-        font-weight: 800;
-        font-size: 0.95rem;
-        color: #fff;
-        border-radius: 8px;
-        background: linear-gradient(135deg, #ec4899, #fb923c);
+        font-family: var(--admin-font-display, 'Fraunces', Georgia, serif);
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-radius: 6px;
+        background: #f7f4ee;
+        color: var(--admin-shell, #2c2419);
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 

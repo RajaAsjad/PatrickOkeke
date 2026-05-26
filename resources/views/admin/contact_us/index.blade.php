@@ -3,7 +3,7 @@
 @section('content')
 @push('css')
 <style>
-	/* Portfolio theme (Lyllianna site): pink / orange / cream */
+	/* Patrick Okeke author theme */
 	.contact-card {
 		background: #ffffff;
 		border-radius: 16px;
@@ -12,7 +12,7 @@
 		overflow: hidden;
 	}
 	.contact-header {
-		background: linear-gradient(135deg, #ec4899 0%, #db2777 50%, #ea580c 100%) !important;
+		background: linear-gradient(135deg, var(--admin-pink) 0%, var(--admin-pink-deep) 50%, var(--admin-orange) 100%) !important;
 		color: #fff;
 		padding: 18px 30px;
 		border-radius: 16px 16px 0 0;
@@ -49,7 +49,7 @@
 	.contact-stats .stat-box .num {
 		font-size: 22px;
 		font-weight: 700;
-		background: linear-gradient(135deg, #ec4899, #fb923c);
+		background: linear-gradient(135deg, var(--admin-pink), var(--admin-orange));
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
@@ -70,12 +70,12 @@
 		background: #fff;
 	}
 	.contact-search .form-control:focus {
-		border-color: #ec4899;
+		border-color: var(--admin-pink);
 		box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.18);
 		outline: none;
 	}
 	.contact-search .btn-filter {
-		background: #ec4899 !important;
+		background: var(--admin-pink) !important;
 		color: #fff !important;
 		border: none;
 		padding: 10px 24px;
@@ -143,7 +143,7 @@
 		align-items: center;
 	}
 	.contact-list-container .btn-show {
-		background: #ec4899 !important;
+		background: var(--admin-pink) !important;
 		border: none;
 		color: #fff !important;
 		font-weight: 600;
@@ -332,7 +332,7 @@ $(document).ready(function() {
 			text: "This contact will be deleted.",
 			icon: 'warning',
 			showCancelButton: true,
-			confirmButtonColor: '#ec4899',
+			confirmButtonColor: 'var(--admin-pink)',
 			cancelButtonColor: '#6c757d',
 			confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
