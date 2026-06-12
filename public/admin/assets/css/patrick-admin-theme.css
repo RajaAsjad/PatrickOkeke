@@ -38,56 +38,34 @@
 }
 
 .pg-dash__banner::before {
-    background:
-        radial-gradient(ellipse 80% 55% at 75% 25%, rgba(168, 90, 50, 0.12) 0%, transparent 58%),
-        radial-gradient(ellipse 55% 45% at 15% 85%, rgba(44, 36, 25, 0.06) 0%, transparent 52%) !important;
-}
-
-.pg-dash__welcome-title {
-    font-family: var(--admin-font-display) !important;
-    background: linear-gradient(135deg, var(--admin-text) 0%, var(--admin-pink) 100%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-}
-
-.pg-dash__welcome-subtitle {
-    font-family: var(--admin-font-body) !important;
-    color: var(--admin-muted) !important;
-}
-
-.pg-dash__card {
-    border-color: var(--admin-border) !important;
-    box-shadow: var(--admin-shadow-soft) !important;
-}
-
-.pg-dash__card::before {
-    background: linear-gradient(90deg, transparent, rgba(168, 90, 50, 0.1), transparent) !important;
-}
-
-.pg-dash__card:hover {
-    border-color: rgba(168, 90, 50, 0.35) !important;
-    box-shadow: 0 16px 40px rgba(44, 36, 25, 0.12) !important;
+    animation: pgDashMesh 18s ease-in-out infinite alternate !important;
 }
 
 .pg-dash__card-icon.brand {
-    background: var(--admin-ink) !important;
-    box-shadow: 0 6px 18px rgba(44, 36, 25, 0.25) !important;
+    background: linear-gradient(135deg, #7c4a2d 0%, #a85a32 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 6px 18px rgba(168, 90, 50, 0.32) !important;
     animation: pgIconGlow 3s ease-in-out infinite !important;
 }
 
 @keyframes pgIconGlow {
-    0%, 100% { box-shadow: 0 6px 18px rgba(44, 36, 25, 0.25); }
-    50% { box-shadow: 0 8px 24px rgba(168, 90, 50, 0.35); }
+    0%, 100% { box-shadow: 0 6px 18px rgba(168, 90, 50, 0.28); }
+    50% { box-shadow: 0 8px 26px rgba(168, 90, 50, 0.45); }
+}
+
+.pg-dash__card-icon.brand i {
+    color: #fff !important;
 }
 
 .pg-dash__card-value {
     font-family: var(--admin-font-body) !important;
+    color: #7c4a2d !important;
 }
 
 .pg-dash__card:hover .pg-dash__card-value {
-    background: linear-gradient(135deg, var(--admin-text), var(--admin-pink)) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
+    color: #a85a32 !important;
+    background: none !important;
+    -webkit-text-fill-color: unset !important;
 }
 
 .pg-dash__card-label {

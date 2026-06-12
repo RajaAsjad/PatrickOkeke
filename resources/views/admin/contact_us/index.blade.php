@@ -3,21 +3,26 @@
 @section('content')
 @push('css')
 <style>
-	/* Patrick Okeke author theme */
+	.contact-admin {
+		--ct-ember: #a85a32;
+		--ct-ember-deep: #7c4a2d;
+		--ct-ember-light: #c9845c;
+		--ct-cream: #f5f3f0;
+	}
 	.contact-card {
 		background: #ffffff;
 		border-radius: 16px;
-		box-shadow: 0 8px 24px rgba(236, 72, 153, 0.1);
-		border: 1px solid rgba(236, 72, 153, 0.15);
+		box-shadow: 0 8px 24px rgba(28, 25, 23, 0.08);
+		border: 1px solid rgba(168, 90, 50, 0.12);
 		overflow: hidden;
 	}
 	.contact-header {
-		background: linear-gradient(135deg, var(--admin-pink) 0%, var(--admin-pink-deep) 50%, var(--admin-orange) 100%) !important;
+		background: linear-gradient(135deg, var(--ct-ember-deep) 0%, var(--ct-ember) 52%, var(--ct-ember-light) 100%) !important;
 		color: #fff;
-		padding: 18px 30px;
+		padding: 22px 30px;
 		border-radius: 16px 16px 0 0;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-		box-shadow: 0 4px 16px rgba(236, 72, 153, 0.25);
+		border-bottom: 2px solid rgba(124, 74, 45, 0.45);
+		box-shadow: 0 4px 16px rgba(168, 90, 50, 0.2);
 		text-align: center;
 	}
 	.contact-header h1 {
@@ -25,99 +30,96 @@
 		font-size: 22px;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		color: #fff;
-		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+		letter-spacing: 0.06em;
+		color: #fff !important;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 	}
 	.contact-stats {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 		gap: 20px;
 		padding: 25px 30px 0;
-		background: #f5f3f0;
+		background: var(--ct-cream);
 		margin-bottom: 20px;
 	}
 	.contact-stats .stat-box {
 		background: #fff;
 		padding: 18px;
 		border-radius: 12px;
-		box-shadow: 0 2px 8px rgba(236, 72, 153, 0.08);
-		border: 1px solid rgba(236, 72, 153, 0.12);
+		box-shadow: 0 2px 8px rgba(28, 25, 23, 0.05);
+		border: 1px solid rgba(168, 90, 50, 0.1);
 		text-align: center;
 		margin-bottom: 20px;
 	}
 	.contact-stats .stat-box .num {
 		font-size: 22px;
 		font-weight: 700;
-		background: linear-gradient(135deg, var(--admin-pink), var(--admin-orange));
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
+		color: var(--ct-ember-deep);
 	}
 	.contact-stats .stat-box .lbl { font-size: 13px; color: #6b7280; font-weight: 500; margin-top: 4px; }
 	.contact-search {
 		background: #fafaf9;
 		padding: 20px 30px;
-		border: 1px solid rgba(236, 72, 153, 0.1);
+		border: 1px solid rgba(168, 90, 50, 0.1);
 		margin: 0 30px 20px;
 		border-radius: 12px;
 	}
 	.contact-search .form-control {
-		border: 1px solid rgba(236, 72, 153, 0.2);
+		border: 2px solid #e7e5e4;
 		border-radius: 10px;
 		font-size: 14px;
 		transition: border-color 0.2s ease, box-shadow 0.2s ease;
 		background: #fff;
 	}
 	.contact-search .form-control:focus {
-		border-color: var(--admin-pink);
-		box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.18);
+		border-color: rgba(168, 90, 50, 0.55);
+		box-shadow: 0 0 0 3px rgba(168, 90, 50, 0.12);
 		outline: none;
 	}
 	.contact-search .btn-filter {
-		background: var(--admin-pink) !important;
+		background: linear-gradient(135deg, var(--ct-ember-deep) 0%, var(--ct-ember) 100%) !important;
 		color: #fff !important;
 		border: none;
 		padding: 10px 24px;
-		border-radius: 9999px;
+		border-radius: 10px;
 		font-weight: 600;
-		transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
-		box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35);
+		transition: all 0.2s ease;
+		box-shadow: 0 4px 14px rgba(168, 90, 50, 0.3);
 	}
 	.contact-search .btn-filter:hover {
-		background: #f472b6 !important;
+		background: linear-gradient(135deg, #6b3f26 0%, var(--ct-ember-deep) 100%) !important;
 		color: #fff !important;
-		box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+		box-shadow: 0 6px 20px rgba(168, 90, 50, 0.38);
 		transform: translateY(-1px);
 	}
 	.contact-search .btn-clear {
-		background: #6b7280;
+		background: #57534e;
 		color: #fff !important;
 		padding: 10px 24px;
-		border-radius: 9999px;
+		border-radius: 10px;
 		font-weight: 600;
 		text-decoration: none;
 		display: inline-block;
 		border: none;
 		transition: background 0.2s ease;
 	}
-	.contact-search .btn-clear:hover { background: #4b5563; color: #fff !important; }
-	.contact-body { padding: 15px 30px 25px; background: #f5f3f0; }
+	.contact-search .btn-clear:hover { background: #44403c; color: #fff !important; }
+	.contact-body { padding: 15px 30px 25px; background: var(--ct-cream); }
 	.contact-list-container .table-wrap {
 		background: #ffffff;
 		border-radius: 12px;
-		border: 1px solid rgba(236, 72, 153, 0.12);
+		border: 1px solid rgba(168, 90, 50, 0.1);
 		overflow: hidden;
-		box-shadow: 0 2px 8px rgba(236, 72, 153, 0.06);
+		box-shadow: 0 2px 8px rgba(28, 25, 23, 0.05);
 	}
 	.contact-list-container .contact-list-table { margin: 0; }
 	.contact-list-container .contact-list-table thead tr {
-		background: linear-gradient(135deg, #fdf2f8 0%, #fff7ed 100%) !important;
-		border-bottom: 1px solid rgba(236, 72, 153, 0.2);
+		background: linear-gradient(135deg, var(--ct-ember-deep) 0%, var(--ct-ember) 55%, var(--ct-ember-light) 100%) !important;
+		border-bottom: 2px solid rgba(124, 74, 45, 0.4);
 	}
 	.contact-list-container .contact-list-table thead th {
 		font-weight: 600;
-		color: #1a1a1a;
+		color: #fff !important;
 		font-size: 13px;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
@@ -126,14 +128,14 @@
 	}
 	.contact-list-container .contact-list-table tbody tr { transition: background 0.2s ease; }
 	.contact-list-container .contact-list-table tbody tr:hover {
-		background: rgba(236, 72, 153, 0.06);
+		background: rgba(168, 90, 50, 0.05);
 	}
 	.contact-list-container .contact-list-table tbody td {
 		padding: 12px;
 		vertical-align: middle;
 		font-size: 14px;
 		color: #374151;
-		border-color: rgba(236, 72, 153, 0.1);
+		border-color: rgba(168, 90, 50, 0.08);
 	}
 	.contact-action-btns {
 		display: flex;
@@ -143,28 +145,28 @@
 		align-items: center;
 	}
 	.contact-list-container .btn-show {
-		background: var(--admin-pink) !important;
+		background: linear-gradient(135deg, var(--ct-ember-deep) 0%, var(--ct-ember) 100%) !important;
 		border: none;
 		color: #fff !important;
 		font-weight: 600;
 		padding: 5px 14px;
-		border-radius: 9999px;
+		border-radius: 8px;
 		font-size: 12px;
 		transition: all 0.2s ease;
 		text-decoration: none !important;
 		display: inline-block;
 		white-space: nowrap;
-		box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+		box-shadow: 0 2px 8px rgba(168, 90, 50, 0.28);
 	}
 	.contact-list-container .btn-show:hover {
-		background: #f472b6 !important;
+		background: linear-gradient(135deg, #6b3f26 0%, var(--ct-ember-deep) 100%) !important;
 		color: #fff !important;
-		box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);
+		box-shadow: 0 4px 12px rgba(168, 90, 50, 0.35);
 		transform: translateY(-1px);
 	}
 	.contact-list-container .btn-delete {
 		padding: 5px 12px;
-		border-radius: 9999px;
+		border-radius: 8px;
 		font-size: 12px;
 		font-weight: 600;
 		transition: all 0.2s ease;
@@ -177,7 +179,7 @@
 	.contact-list-container .pagination-wrap {
 		padding: 16px;
 		background: #fafaf9;
-		border-top: 1px solid rgba(236, 72, 153, 0.12);
+		border-top: 1px solid rgba(168, 90, 50, 0.1);
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
@@ -199,7 +201,7 @@
 
 <input type="hidden" id="page_url" value="{{ route('contactus.index') }}">
 <input type="hidden" id="status" value="All">
-<section class="content-header" style="margin-bottom: 0;">
+<section class="content-header contact-admin" style="margin-bottom: 0;">
 	<div class="contact-card">
 		<div class="contact-header">
 			<h1>{{ $page_title }}</h1>
@@ -332,7 +334,7 @@ $(document).ready(function() {
 			text: "This contact will be deleted.",
 			icon: 'warning',
 			showCancelButton: true,
-			confirmButtonColor: 'var(--admin-pink)',
+			confirmButtonColor: '#a85a32',
 			cancelButtonColor: '#6c757d',
 			confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {

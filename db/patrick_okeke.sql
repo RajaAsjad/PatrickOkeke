@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2026 at 09:24 PM
+-- Generation Time: Jun 13, 2026 at 01:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -71,6 +71,73 @@ INSERT INTO `banners` (`id`, `slug`, `title`, `heading`, `image`, `status`, `del
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `books`
+--
+
+CREATE TABLE `books` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `subtitle` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `year` varchar(4) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `excerpt` text DEFAULT NULL,
+  `cover` varchar(255) DEFAULT NULL,
+  `file_path` varchar(255) DEFAULT NULL,
+  `file_type` varchar(10) NOT NULL DEFAULT 'pdf',
+  `price` decimal(8,2) NOT NULL DEFAULT 9.99,
+  `featured` tinyint(1) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `sort_order` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `books`
+--
+
+INSERT INTO `books` (`id`, `title`, `slug`, `subtitle`, `category`, `year`, `description`, `excerpt`, `cover`, `file_path`, `file_type`, `price`, `featured`, `status`, `sort_order`, `created_at`, `updated_at`) VALUES
+(1, 'Blurred Lines', 'blurred-lines', 'Decoding the Patterns of Cultural Identity', 'Cultural Studies', '2024', 'An incisive exploration of the intricate weave of global traditions, and how identity is shaped, distorted and reborn across borders.', 'An incisive exploration of the intricate weave of global traditions, and how identity is shaped, distorted and reborn across borders.', 'book-blurred-lines-odPx23y8.png', '20260612222859_blurred-lines-2.epub', 'epub', 9.99, 1, 1, 1, '2026-06-12 17:28:44', '2026-06-12 17:28:59'),
+(2, 'Boosting the Size of Sale', 'boosting-the-size-of-sale', 'An in-depth look at the qualities of a good influencer', 'Business', '2024', 'A practical guide to modern persuasion — what makes a voice trusted, a message sticky, and a sale inevitable in the influencer economy.', 'A practical guide to modern persuasion — what makes a voice trusted, a message sticky, and a sale inevitable in the influencer economy.', 'book-boosting-sale-B9xmqxqR.png', '20260612222859_boosting-the-size-of-sale-manuscript.pdf', 'pdf', 12.99, 1, 1, 2, '2026-06-12 17:28:44', '2026-06-12 17:28:59'),
+(3, 'CEOs of TikTok', 'ceos-of-tiktok', 'Build New Paradigms of Life and Tech', 'Technology', '2025', 'How a new generation of founders is rewriting the rules of leadership, attention, and creative power in a vertical-video world.', 'How a new generation of founders is rewriting the rules of leadership, attention, and creative power in a vertical-video world.', 'book-ceos-tiktok-BTyhDE6Y.png', '20260612222859_ceos-tiktok.pdf', 'pdf', 14.99, 1, 1, 3, '2026-06-12 17:28:44', '2026-06-12 17:28:59'),
+(4, 'IQ — An Overrated Quotient', 'iq-an-overrated-quotient', 'Where creativity meets the technical', 'Essays', '2025', 'On the combination of creative and technical thinking — the real foundation of a project, an idea, a life worth building.', 'On the combination of creative and technical thinking — the real foundation of a project, an idea, a life worth building.', 'book-iq-quotient-BO-q7Rls.png', '20260612222859_iq-an-overrated-quotient-manuscript--1-.pdf', 'pdf', 11.99, 1, 1, 4, '2026-06-12 17:28:44', '2026-06-12 17:28:59'),
+(5, 'The Dogged Spirit of Success', 'the-dogged-spirit-of-success', 'Persistence, purpose, and the path to lasting achievement', 'Self-Development', '2025', 'A reflection on resilience, discipline, and the mindset required to turn ambition into enduring success.', 'A reflection on resilience, discipline, and the mindset required to turn ambition into enduring success.', NULL, '20260612222859_the-dogged-spirit-of-success-cover.pdf', 'pdf', 10.99, 0, 1, 5, '2026-06-12 17:28:44', '2026-06-12 17:28:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_orders`
+--
+
+CREATE TABLE `book_orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `book_id` bigint(20) UNSIGNED NOT NULL,
+  `customer_email` varchar(255) NOT NULL,
+  `customer_name` varchar(255) DEFAULT NULL,
+  `stripe_session_id` varchar(255) NOT NULL,
+  `stripe_payment_intent` varchar(255) DEFAULT NULL,
+  `amount_paid` decimal(8,2) NOT NULL,
+  `currency` varchar(3) NOT NULL DEFAULT 'usd',
+  `status` enum('pending','paid','failed') NOT NULL DEFAULT 'pending',
+  `download_token` varchar(64) NOT NULL,
+  `downloaded_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `book_orders`
+--
+
+INSERT INTO `book_orders` (`id`, `book_id`, `customer_email`, `customer_name`, `stripe_session_id`, `stripe_payment_intent`, `amount_paid`, `currency`, `status`, `download_token`, `downloaded_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'pending@checkout.stripe', NULL, 'cs_test_a1Xz7XYKLmtqKWpuQ4KIZ5HE0lojk4Kuxg2VMaFQiVy37mDM6pOAaHaoA8', NULL, 9.99, 'usd', 'pending', 'zYegLWcYYjrB8KfgUmXS5WrOLSzJiw0VYDHHGfuTqAib16WPVLB7ZUTJBwzO5R2t', NULL, '2026-06-12 17:29:33', '2026-06-12 17:29:33'),
+(2, 3, 'pending@checkout.stripe', NULL, 'cs_test_a12kLXG9H0E5k3fzsQ3yiTmT5Qo5mutMTTMoTqm6sU9L3Af3HNwyrkshVv', NULL, 14.99, 'usd', 'pending', 'uwjL2Taj3j2TI40Ko1AIc9hPi9AGuVuDvTkTxrj6ZWzpfP7stAUHkT7FDCEkhcrS', NULL, '2026-06-12 17:45:27', '2026-06-12 17:45:27');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `brands`
 --
 
@@ -131,7 +198,7 @@ CREATE TABLE `contact_us` (
 
 INSERT INTO `contact_us` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `message`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 'Tatiana', 'Patrick', 'qigetylova@mailinator.com', '+1 (104) 308-4146', 'Id et voluptatum co', 'Numquam quidem sit', '1', '2026-02-26 16:58:03', '2026-02-25 13:35:35', '2026-02-26 11:58:03'),
-(2, 'Solomon', 'Wooten', 'zodyw@mailinator.com', '+1 (867) 988-5696', 'Ezekiel Todd', 'Ducimus ut ullam fu', '1', NULL, '2026-04-16 18:44:01', '2026-04-16 18:44:01');
+(2, 'Solomon', 'Wooten', 'zodyw@mailinator.com', '+1 (867) 988-5696', 'Ezekiel Todd', 'Ducimus ut ullam fu', '1', '2026-05-26 19:37:51', '2026-04-16 18:44:01', '2026-05-26 14:37:51');
 
 -- --------------------------------------------------------
 
@@ -311,7 +378,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (159, '2026_03_11_194327_create_schedule_shop_contacts_table', 109),
 (160, '2026_02_24_201750_create_videos_table', 110),
 (161, '2026_05_06_000001_add_thumbnail_url_to_videos_table', 111),
-(162, '2026_05_06_120000_add_thumbnail_url_to_videos_table', 112);
+(162, '2026_05_06_120000_add_thumbnail_url_to_videos_table', 112),
+(163, '2026_06_13_000001_create_books_table', 113),
+(164, '2026_06_13_000002_create_book_orders_table', 113);
 
 -- --------------------------------------------------------
 
@@ -727,7 +796,11 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `permission`, `deleted_at
 (253, 'homebgt-list', 'web', 'list', NULL, '2026-04-10 14:42:30', '2026-04-10 14:42:30'),
 (254, 'homebgt-create', 'web', 'create', NULL, '2026-04-10 14:42:30', '2026-04-10 14:42:30'),
 (255, 'homebgt-edit', 'web', 'edit', NULL, '2026-04-10 14:42:30', '2026-04-10 14:42:30'),
-(256, 'homebgt-delete', 'web', 'delete', NULL, '2026-04-10 14:42:31', '2026-04-10 14:42:31');
+(256, 'homebgt-delete', 'web', 'delete', NULL, '2026-04-10 14:42:31', '2026-04-10 14:42:31'),
+(257, 'book-list', 'web', NULL, NULL, '2026-06-12 17:28:45', '2026-06-12 17:28:45'),
+(258, 'book-create', 'web', NULL, NULL, '2026-06-12 17:28:45', '2026-06-12 17:28:45'),
+(259, 'book-edit', 'web', NULL, NULL, '2026-06-12 17:28:45', '2026-06-12 17:28:45'),
+(260, 'book-delete', 'web', NULL, NULL, '2026-06-12 17:28:45', '2026-06-12 17:28:45');
 
 -- --------------------------------------------------------
 
@@ -882,7 +955,11 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (253, 1),
 (254, 1),
 (255, 1),
-(256, 1);
+(256, 1),
+(257, 1),
+(258, 1),
+(259, 1),
+(260, 1);
 
 -- --------------------------------------------------------
 
@@ -1090,7 +1167,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `last_name`, `phone`, `email`, `address`, `email_verified_at`, `password`, `remember_token`, `deleted_at`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Perry', 'Grant', NULL, 'admin@gmail.com', NULL, NULL, '$2y$10$QowHn04SUEIx8Lo.kQahTehd1cmYS2NnLkwDlqRARD7bVtpnNg/mi', NULL, NULL, '1', NULL, '2024-05-14 20:23:10');
+(1, 'Patrick', 'Okeke', NULL, 'admin@gmail.com', NULL, NULL, '$2y$10$QowHn04SUEIx8Lo.kQahTehd1cmYS2NnLkwDlqRARD7bVtpnNg/mi', NULL, NULL, '1', NULL, '2024-05-14 20:23:10');
 
 -- --------------------------------------------------------
 
@@ -1364,6 +1441,22 @@ ALTER TABLE `banners`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `books_slug_unique` (`slug`);
+
+--
+-- Indexes for table `book_orders`
+--
+ALTER TABLE `book_orders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `book_orders_stripe_session_id_unique` (`stripe_session_id`),
+  ADD UNIQUE KEY `book_orders_download_token_unique` (`download_token`),
+  ADD KEY `book_orders_book_id_foreign` (`book_id`);
+
+--
 -- Indexes for table `brands`
 --
 ALTER TABLE `brands`
@@ -1527,6 +1620,18 @@ ALTER TABLE `banners`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `books`
+--
+ALTER TABLE `books`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `book_orders`
+--
+ALTER TABLE `book_orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
@@ -1560,7 +1665,7 @@ ALTER TABLE `latest_news`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -1578,7 +1683,7 @@ ALTER TABLE `page_settings`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=261;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1643,6 +1748,12 @@ ALTER TABLE `web_links`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `book_orders`
+--
+ALTER TABLE `book_orders`
+  ADD CONSTRAINT `book_orders_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `model_has_permissions`

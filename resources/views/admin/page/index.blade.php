@@ -3,21 +3,27 @@
 @section('content')
 @push('css')
 <style>
-	.page-admin { --pg-pink: #ec4899; --pg-pink-deep: #be185d; --pg-orange: #fb923c; --pg-cream: #f5f3f0; --pg-text: #1c1917; }
+	.page-admin {
+		--pg-ember: #a85a32;
+		--pg-ember-deep: #7c4a2d;
+		--pg-ember-light: #c9845c;
+		--pg-cream: #f5f3f0;
+		--pg-text: #1c1917;
+	}
 	.page-card {
 		background: #fff;
 		border-radius: 12px;
-		box-shadow: 0 4px 24px rgba(236, 72, 153, 0.1);
-		border: 1px solid rgba(236, 72, 153, 0.15);
+		box-shadow: 0 4px 24px rgba(28, 25, 23, 0.08);
+		border: 1px solid rgba(168, 90, 50, 0.12);
 		overflow: hidden;
 	}
 	.page-header {
-		background: linear-gradient(135deg, var(--pg-pink) 0%, #f472b6 45%, var(--pg-orange) 100%) !important;
+		background: linear-gradient(135deg, var(--pg-ember-deep) 0%, var(--pg-ember) 52%, var(--pg-ember-light) 100%) !important;
 		color: #fff;
-		padding: 18px 30px;
+		padding: 22px 30px;
 		border-radius: 12px 12px 0 0;
-		border-bottom: 2px solid rgba(190, 24, 93, 0.35);
-		box-shadow: 0 4px 20px rgba(236, 72, 153, 0.2);
+		border-bottom: 2px solid rgba(124, 74, 45, 0.45);
+		box-shadow: 0 4px 20px rgba(168, 90, 50, 0.18);
 		text-align: center;
 		margin: 0 0 20px 0 !important;
 	}
@@ -26,8 +32,9 @@
 		font-size: 22px;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+		letter-spacing: 0.06em;
+		color: #fff !important;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 	}
 	.page-stats {
 		display: grid;
@@ -41,17 +48,17 @@
 		background: #fff;
 		padding: 18px;
 		border-radius: 12px;
-		box-shadow: 0 2px 12px rgba(236, 72, 153, 0.08);
-		border: 1px solid rgba(236, 72, 153, 0.12);
+		box-shadow: 0 2px 12px rgba(28, 25, 23, 0.05);
+		border: 1px solid rgba(168, 90, 50, 0.1);
 		text-align: center;
 		margin-bottom: 20px;
 	}
-	.page-stats .stat-box .num { font-size: 22px; font-weight: 700; color: var(--pg-text); }
+	.page-stats .stat-box .num { font-size: 22px; font-weight: 700; color: var(--pg-ember-deep); }
 	.page-stats .stat-box .lbl { font-size: 13px; color: #6b7280; font-weight: 500; margin-top: 4px; }
 	.page-stats .stat-box .btn-add-page {
-		background: linear-gradient(135deg, var(--pg-pink) 0%, var(--pg-orange) 100%) !important;
+		background: linear-gradient(135deg, var(--pg-ember-deep) 0%, var(--pg-ember) 100%) !important;
 		color: #fff !important;
-		border: 1px solid rgba(255, 255, 255, 0.35);
+		border: 1px solid rgba(255, 255, 255, 0.25);
 		border-radius: 8px;
 		padding: 10px 20px;
 		font-weight: 600;
@@ -60,15 +67,15 @@
 		transition: all 0.3s ease;
 	}
 	.page-stats .stat-box .btn-add-page:hover {
-		background: linear-gradient(135deg, #db2777 0%, #ea580c 100%) !important;
+		background: linear-gradient(135deg, #6b3f26 0%, var(--pg-ember-deep) 100%) !important;
 		color: #fff !important;
-		box-shadow: 0 4px 16px rgba(236, 72, 153, 0.35);
+		box-shadow: 0 4px 16px rgba(168, 90, 50, 0.35);
 		transform: translateY(-1px);
 	}
 	.page-search {
 		background: var(--pg-cream);
 		padding: 20px 30px;
-		border: 1px solid rgba(236, 72, 153, 0.12);
+		border: 1px solid rgba(168, 90, 50, 0.1);
 		margin: 0 30px 20px;
 		border-radius: 8px;
 	}
@@ -80,12 +87,12 @@
 		background: #fff;
 	}
 	.page-search .form-control:focus {
-		border-color: rgba(236, 72, 153, 0.55);
-		box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.15);
+		border-color: rgba(168, 90, 50, 0.55);
+		box-shadow: 0 0 0 3px rgba(168, 90, 50, 0.12);
 		outline: none;
 	}
 	.page-search .btn-filter {
-		background: linear-gradient(135deg, var(--pg-pink) 0%, var(--pg-orange) 100%) !important;
+		background: linear-gradient(135deg, var(--pg-ember-deep) 0%, var(--pg-ember) 100%) !important;
 		color: #fff !important;
 		border: none;
 		padding: 10px 24px;
@@ -94,9 +101,9 @@
 		transition: all 0.3s ease;
 	}
 	.page-search .btn-filter:hover {
-		background: linear-gradient(135deg, #db2777 0%, #ea580c 100%) !important;
+		background: linear-gradient(135deg, #6b3f26 0%, var(--pg-ember-deep) 100%) !important;
 		color: #fff !important;
-		box-shadow: 0 4px 14px rgba(236, 72, 153, 0.3);
+		box-shadow: 0 4px 14px rgba(168, 90, 50, 0.35);
 	}
 	.page-search .btn-clear {
 		background: #57534e;
@@ -114,18 +121,18 @@
 	.page-list-container .table-wrap {
 		background: #fff;
 		border-radius: 8px;
-		border: 1px solid rgba(236, 72, 153, 0.12);
+		border: 1px solid rgba(168, 90, 50, 0.1);
 		overflow: hidden;
-		box-shadow: 0 2px 12px rgba(236, 72, 153, 0.06);
+		box-shadow: 0 2px 12px rgba(28, 25, 23, 0.05);
 	}
 	.page-list-container .page-list-table { margin: 0; }
 	.page-list-container .page-list-table thead tr {
-		background: linear-gradient(135deg, var(--pg-pink-deep) 0%, var(--pg-pink) 50%, #ea580c 100%) !important;
-		border-bottom: 2px solid rgba(190, 24, 93, 0.4);
+		background: linear-gradient(135deg, var(--pg-ember-deep) 0%, var(--pg-ember) 55%, var(--pg-ember-light) 100%) !important;
+		border-bottom: 2px solid rgba(124, 74, 45, 0.4);
 	}
 	.page-list-container .page-list-table thead th {
 		font-weight: 600;
-		color: #fff;
+		color: #fff !important;
 		font-size: 13px;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
@@ -133,7 +140,7 @@
 		border: none;
 	}
 	.page-list-container .page-list-table tbody tr { transition: background 0.2s ease; }
-	.page-list-container .page-list-table tbody tr:hover { background: rgba(236, 72, 153, 0.06); }
+	.page-list-container .page-list-table tbody tr:hover { background: rgba(168, 90, 50, 0.05); }
 	.page-list-container .page-list-table tbody td {
 		padding: 12px;
 		vertical-align: middle;
@@ -163,7 +170,7 @@
 		align-items: center;
 	}
 	.page-list-container .btn-edit {
-		background: linear-gradient(135deg, var(--pg-pink) 0%, var(--pg-orange) 100%) !important;
+		background: linear-gradient(135deg, var(--pg-ember-deep) 0%, var(--pg-ember) 100%) !important;
 		border: none;
 		color: #fff !important;
 		font-weight: 600;
@@ -176,9 +183,9 @@
 		white-space: nowrap;
 	}
 	.page-list-container .btn-edit:hover {
-		background: linear-gradient(135deg, #db2777 0%, #ea580c 100%) !important;
+		background: linear-gradient(135deg, #6b3f26 0%, var(--pg-ember-deep) 100%) !important;
 		color: #fff !important;
-		box-shadow: 0 2px 10px rgba(236, 72, 153, 0.35);
+		box-shadow: 0 2px 10px rgba(168, 90, 50, 0.35);
 		transform: translateY(-1px);
 	}
 	.page-list-container .btn-delete {
@@ -358,7 +365,7 @@ $(document).ready(function() {
 			text: "This page will be deleted.",
 			icon: 'warning',
 			showCancelButton: true,
-			confirmButtonColor: '#ec4899',
+			confirmButtonColor: '#a85a32',
 			cancelButtonColor: '#6c757d',
 			confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {

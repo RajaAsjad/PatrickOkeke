@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+
 class WebController extends Controller
 {
     public function Index()
     {
         $page_title = 'Patrick Okeke — Author of Culture, Technology & Craft';
         $meta_description = 'Official author site of Patrick Okeke. Explore featured books, essays and the writing journey behind them.';
-        $books = config('website.books');
+        $books = Book::active()->featured()->ordered()->take(4)->get();
 
         return view('website.index', compact('page_title', 'meta_description', 'books'));
     }
@@ -25,9 +27,18 @@ class WebController extends Controller
     {
         $page_title = 'Books — Patrick Okeke';
         $meta_description = 'All books by Patrick Okeke — independently published works on culture, technology, and craft.';
-        $books = config('website.books');
+        $books = Book::active()->ordered()->get();
 
         return view('website.books', compact('page_title', 'meta_description', 'books'));
+    }
+
+    public function BookShow(string $slug)
+    {
+        $book = Book::active()->where('slug', $slug)->firstOrFail();
+        $page_title = $book->title.' — Patrick Okeke';
+        $meta_description = $book->description;
+
+        return view('website.book-show', compact('page_title', 'book'));
     }
 
     public function Contact()

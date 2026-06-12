@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WebController; 
+use App\Http\Controllers\WebController;
+use App\Http\Controllers\BookPurchaseController;
 use App\Http\Controllers\admin\BannerController;
+use App\Http\Controllers\admin\BookController;
 use App\Http\Controllers\admin\HomeSliderController;
 use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\admin\ContactUsController;
@@ -44,8 +46,12 @@ Route::post('admin/logout', 'admin\AdminController@logOut')->name('admin.logout'
 // Frontend — Phoenix Neat Space Cleaning
 Route::get('/', [WebController::class, 'Index'])->name('index'); 
 Route::get('about', [WebController::class, 'About'])->name('about');
-Route::get('books', [WebController::class, 'Books'])->name('books'); 
-Route::get('contact', [WebController::class, 'Contact'])->name('contact'); 
+Route::get('books', [WebController::class, 'Books'])->name('books');
+Route::get('books/purchase/success', [BookPurchaseController::class, 'success'])->name('books.purchase.success');
+Route::get('books/download/{token}', [BookPurchaseController::class, 'download'])->name('books.download');
+Route::get('books/{slug}/checkout', [BookPurchaseController::class, 'checkout'])->name('books.checkout');
+Route::get('books/{slug}', [WebController::class, 'BookShow'])->name('books.show');
+Route::get('contact', [WebController::class, 'Contact'])->name('contact');
 
 
 // Redirect /login to admin login (session expired or user types /login in URL)
@@ -86,6 +92,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Video
     Route::resource('video', VideoController::class);
+
+    //Books
+    Route::resource('book', BookController::class);
     
     //Audios
     Route::resource('audio', AudioController::class);

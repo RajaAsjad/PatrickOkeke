@@ -10,7 +10,7 @@ use App\Models\Testimonial;
 use App\Models\ContactUs;
 use App\Models\ShopContact;
 use App\Models\PhotoGallery;
-use App\Models\Video;
+use App\Models\Book;
 use App\Models\Audio;
 class HomeController extends Controller
 {
@@ -39,22 +39,22 @@ class HomeController extends Controller
 
             $shopContactTotal = ShopContact::count(); 
 
-            $galleryTotal = PhotoGallery::count(); 
+            $galleryTotal = PhotoGallery::count();
 
-            $videoTotal = Video::count(); 
+            $bookTotal = Book::count();
 
-            $audioTotal = Audio::count(); 
+            $audioTotal = Audio::count();
 
             return view('admin.dashboard.dashboard', compact(
                 'page_title',
-                'slidersTotal', 
-                'bannersTotal', 
-                'testimonialsTotal', 
-                'contactUsTotal', 
-                'shopContactTotal', 
-                'galleryTotal', 
-                'videoTotal', 
-                'audioTotal', 
+                'slidersTotal',
+                'bannersTotal',
+                'testimonialsTotal',
+                'contactUsTotal',
+                'shopContactTotal',
+                'galleryTotal',
+                'bookTotal',
+                'audioTotal',
             ));
         }
 
