@@ -48,8 +48,10 @@ Route::get('/', [WebController::class, 'Index'])->name('index');
 Route::get('about', [WebController::class, 'About'])->name('about');
 Route::get('books', [WebController::class, 'Books'])->name('books');
 Route::get('books/purchase/success', [BookPurchaseController::class, 'success'])->name('books.purchase.success');
-Route::get('books/download/{token}', [BookPurchaseController::class, 'download'])->name('books.download');
+Route::get('book-download/{token}', [BookPurchaseController::class, 'download'])->name('book.download')->where('token', '[A-Za-z0-9]+');
+Route::get('books/download/{token}', [BookPurchaseController::class, 'legacyDownloadRedirect'])->name('books.download')->where('token', '[A-Za-z0-9]+');
 Route::get('books/{slug}/checkout', [BookPurchaseController::class, 'checkout'])->name('books.checkout');
+Route::post('books/{slug}/payment-intent', [BookPurchaseController::class, 'paymentIntent'])->name('books.payment-intent');
 Route::get('books/{slug}', [WebController::class, 'BookShow'])->name('books.show');
 Route::get('contact', [WebController::class, 'Contact'])->name('contact');
 

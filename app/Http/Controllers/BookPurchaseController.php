@@ -5,132 +5,237 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\BookOrder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Stripe\Checkout\Session;
+use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
 class BookPurchaseController extends Controller
 {
-    public function checkout(string $slug)
+    public function checkout($slug)
     {
-        $book = Book::active()->where('slug', $slug)->firstOrFail();
+        $book = Book::where('slug', $slug)->active()->firstOrFail();
 
         if (! $book->file_path) {
             return redirect()->route('books.show', $book->slug)
                 ->with('error', 'This book is not available for purchase yet.');
         }
 
-        Stripe::setApiKey(config('services.stripe.secret'));
+        if (! config('services.stripe.key') || ! config('services.stripe.secret')) {
+            return redirect()->route('books.show', $book->slug)
+                ->with('error', 'Payment is not configured. Please contact the author.');
+        }
 
-        $session = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'usd',
-                    'unit_amount' => (int) round($book->price * 100),
-                    'product_data' => [
-                        'name' => $book->title,
-                        'description' => $book->subtitle,
-                    ],
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => route('books.purchase.success').'?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('books.show', $book->slug).'?cancelled=1',
-            'metadata' => [
-                'book_id' => (string) $book->id,
-            ],
-        ]);
+        $page_title = 'Checkout — '.$book->title;
 
-        BookOrder::updateOrCreate(
-            ['stripe_session_id' => $session->id],
-            [
-                'book_id' => $book->id,
-                'customer_email' => 'pending@checkout.stripe',
-                'amount_paid' => $book->price,
-                'currency' => 'usd',
-                'status' => 'pending',
-                'download_token' => Str::random(64),
-            ]
-        );
-
-        return redirect($session->url);
+        return view('website.book-checkout', compact('book', 'page_title'));
     }
 
-    public function success(Request $request)
+    public function paymentIntent(Request $request, $slug)
     {
-        $sessionId = $request->query('session_id');
+        $request->validate([
+            'email' => 'required|email|max:255',
+            'name' => 'nullable|string|max:255',
+        ]);
 
-        if (! $sessionId) {
-            return redirect()->route('books')->with('error', 'Invalid purchase session.');
+        $book = Book::where('slug', $slug)->active()->firstOrFail();
+
+        if (! $book->file_path) {
+            return response()->json(['error' => 'This book is not available for purchase.'], 422);
         }
 
         Stripe::setApiKey(config('services.stripe.secret'));
-        $session = Session::retrieve($sessionId);
 
-        if ($session->payment_status !== 'paid') {
-            return redirect()->route('books')->with('error', 'Payment was not completed.');
-        }
+        $intent = PaymentIntent::create([
+            'amount' => (int) round((float) $book->price * 100),
+            'currency' => 'usd',
+            'automatic_payment_methods' => ['enabled' => true],
+            'metadata' => [
+                'book_id' => (string) $book->id,
+                'book_slug' => $book->slug,
+            ],
+            'receipt_email' => $request->email,
+        ]);
 
-        $bookId = (int) ($session->metadata->book_id ?? 0);
-        $book = Book::find($bookId);
-
-        if (! $book) {
-            return redirect()->route('books')->with('error', 'Book not found for this purchase.');
-        }
-
-        $order = BookOrder::where('stripe_session_id', $sessionId)->first();
+        $order = BookOrder::where('stripe_payment_intent', $intent->id)->first();
 
         if (! $order) {
             $order = BookOrder::create([
                 'book_id' => $book->id,
-                'customer_email' => $session->customer_details->email ?? $session->customer_email ?? 'unknown@stripe.com',
-                'customer_name' => $session->customer_details->name ?? null,
-                'stripe_session_id' => $sessionId,
-                'stripe_payment_intent' => $session->payment_intent,
+                'customer_email' => $request->email,
+                'customer_name' => $request->name,
+                'stripe_session_id' => $intent->id,
+                'stripe_payment_intent' => $intent->id,
                 'amount_paid' => $book->price,
                 'currency' => 'usd',
+                'status' => 'pending',
+                'download_token' => Str::random(64),
+            ]);
+        } else {
+            $order->update([
+                'customer_email' => $request->email,
+                'customer_name' => $request->name,
+            ]);
+        }
+
+        return response()->json([
+            'clientSecret' => $intent->client_secret,
+            'orderToken' => $order->download_token,
+        ]);
+    }
+
+    public function success(Request $request)
+    {
+        $paymentIntentId = $request->query('payment_intent');
+        $sessionId = $request->query('session_id');
+
+        if (! $paymentIntentId && ! $sessionId) {
+            return redirect()->route('books')->with('error', 'Invalid purchase session.');
+        }
+
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        if ($paymentIntentId) {
+            return $this->successFromPaymentIntent($paymentIntentId);
+        }
+
+        return $this->successFromCheckoutSession($sessionId);
+    }
+
+    private function successFromPaymentIntent(string $paymentIntentId)
+    {
+        try {
+            $intent = PaymentIntent::retrieve($paymentIntentId);
+        } catch (\Exception $e) {
+            return redirect()->route('books')->with('error', 'Could not verify payment.');
+        }
+
+        if ($intent->status !== 'succeeded') {
+            return redirect()->route('books')->with('error', 'Payment was not completed.');
+        }
+
+        $order = BookOrder::where('stripe_payment_intent', $intent->id)->first();
+
+        if (! $order) {
+            $bookId = $intent->metadata->book_id ?? null;
+            $book = $bookId ? Book::find($bookId) : null;
+
+            if (! $book) {
+                return redirect()->route('books')->with('error', 'Order not found.');
+            }
+
+            $order = BookOrder::create([
+                'book_id' => $book->id,
+                'customer_email' => $intent->receipt_email ?? 'customer@unknown.com',
+                'customer_name' => null,
+                'stripe_session_id' => $intent->id,
+                'stripe_payment_intent' => $intent->id,
+                'amount_paid' => $intent->amount / 100,
+                'currency' => $intent->currency,
                 'status' => 'paid',
                 'download_token' => Str::random(64),
             ]);
         } else {
             $order->update([
-                'customer_email' => $session->customer_details->email ?? $session->customer_email ?? $order->customer_email,
-                'customer_name' => $session->customer_details->name ?? $order->customer_name,
-                'stripe_payment_intent' => $session->payment_intent,
                 'status' => 'paid',
+                'amount_paid' => $intent->amount / 100,
+                'currency' => $intent->currency,
             ]);
         }
 
-        $page_title = 'Purchase Complete — '.$book->title;
+        $book = $order->book;
 
-        return view('website.purchase-success', compact('page_title', 'book', 'order'));
+        return view('website.purchase-success', [
+            'book' => $book,
+            'order' => $order,
+            'page_title' => 'Purchase Complete — '.$book->title,
+        ]);
     }
 
-    public function download(string $token)
+    private function successFromCheckoutSession(string $sessionId)
     {
-        $order = BookOrder::where('download_token', $token)->where('status', 'paid')->first();
-
-        if (! $order || ! $order->book || ! $order->book->file_path) {
-            abort(404, 'Download not found or payment not verified.');
+        try {
+            $session = Session::retrieve($sessionId);
+        } catch (\Exception $e) {
+            return redirect()->route('books')->with('error', 'Could not verify payment.');
         }
 
-        $path = storage_path('app/books/'.$order->book->file_path);
+        if ($session->payment_status !== 'paid') {
+            return redirect()->route('books')->with('error', 'Payment was not completed.');
+        }
 
-        if (! File::exists($path)) {
+        $order = BookOrder::where('stripe_session_id', $sessionId)->first();
+
+        if (! $order) {
+            $bookId = $session->metadata->book_id ?? null;
+            $book = $bookId ? Book::find($bookId) : null;
+
+            if (! $book) {
+                return redirect()->route('books')->with('error', 'Order not found.');
+            }
+
+            $order = BookOrder::create([
+                'book_id' => $book->id,
+                'customer_email' => $session->customer_details->email ?? $session->customer_email ?? 'customer@unknown.com',
+                'customer_name' => $session->customer_details->name ?? null,
+                'stripe_session_id' => $sessionId,
+                'stripe_payment_intent' => $session->payment_intent,
+                'amount_paid' => $session->amount_total / 100,
+                'currency' => $session->currency,
+                'status' => 'paid',
+                'download_token' => Str::random(64),
+            ]);
+        } else {
+            $order->update([
+                'status' => 'paid',
+                'stripe_payment_intent' => $session->payment_intent,
+                'amount_paid' => $session->amount_total / 100,
+                'currency' => $session->currency,
+            ]);
+        }
+
+        $book = $order->book;
+
+        return view('website.purchase-success', [
+            'book' => $book,
+            'order' => $order,
+            'page_title' => 'Purchase Complete — '.$book->title,
+        ]);
+    }
+
+    public function download($token)
+    {
+        $order = BookOrder::where('download_token', $token)
+            ->where('status', 'paid')
+            ->firstOrFail();
+
+        $book = $order->book;
+        $filePath = $book->resolveFilePath();
+
+        if (! $filePath) {
+            Log::error('Book download file missing', [
+                'book_id' => $book->id,
+                'file_path' => $book->file_path,
+                'order_id' => $order->id,
+            ]);
+
             abort(404, 'Book file is missing. Please contact support.');
         }
 
-        if (! $order->downloaded_at) {
-            $order->update(['downloaded_at' => now()]);
-        }
+        $order->update(['downloaded_at' => now()]);
 
-        $extension = $order->book->file_type ?: 'pdf';
-        $filename = Str::slug($order->book->title).'.'.$extension;
-        $mime = $extension === 'epub' ? 'application/epub+zip' : 'application/pdf';
+        $downloadName = Str::slug($book->title).'.'.$book->file_type;
 
-        return response()->download($path, $filename, ['Content-Type' => $mime]);
+        return response()->download($filePath, $downloadName, [
+            'Content-Type' => $book->file_type === 'epub'
+                ? 'application/epub+zip'
+                : 'application/pdf',
+        ]);
+    }
+
+    public function legacyDownloadRedirect($token)
+    {
+        return redirect()->route('book.download', ['token' => $token], 301);
     }
 }

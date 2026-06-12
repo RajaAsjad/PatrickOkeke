@@ -67,6 +67,65 @@ class Book extends Model
         return '$'.number_format((float) $this->price, 2);
     }
 
+    public function resolveFilePath(): ?string
+    {
+        if (! $this->file_path) {
+            return null;
+        }
+
+        $bookDir = storage_path('app/books');
+        $candidates = [
+            $bookDir.DIRECTORY_SEPARATOR.$this->file_path,
+            $bookDir.DIRECTORY_SEPARATOR.basename($this->file_path),
+        ];
+
+        foreach ($candidates as $path) {
+            if (is_file($path)) {
+                return $path;
+            }
+        }
+
+        if (! is_dir($bookDir)) {
+            @mkdir($bookDir, 0755, true);
+        }
+
+        $sourceDir = public_path('assets/admin');
+        if (! is_dir($sourceDir)) {
+            return null;
+        }
+
+        $slugWords = array_filter(explode('-', $this->slug), fn ($w) => strlen($w) > 2);
+
+        foreach (scandir($sourceDir) ?: [] as $file) {
+            if (! preg_match('/\.(pdf|epub)$/i', $file)) {
+                continue;
+            }
+
+            $lower = strtolower($file);
+            $matches = 0;
+
+            foreach ($slugWords as $word) {
+                if (str_contains($lower, $word)) {
+                    $matches++;
+                }
+            }
+
+            if ($matches >= min(2, count($slugWords))) {
+                $dest = $bookDir.DIRECTORY_SEPARATOR.$this->file_path;
+
+                if (! is_file($dest)) {
+                    @copy($sourceDir.DIRECTORY_SEPARATOR.$file, $dest);
+                }
+
+                if (is_file($dest)) {
+                    return $dest;
+                }
+            }
+        }
+
+        return null;
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status', true);
