@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2026 at 01:13 AM
+-- Generation Time: Jun 17, 2026 at 07:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -133,7 +133,9 @@ CREATE TABLE `book_orders` (
 
 INSERT INTO `book_orders` (`id`, `book_id`, `customer_email`, `customer_name`, `stripe_session_id`, `stripe_payment_intent`, `amount_paid`, `currency`, `status`, `download_token`, `downloaded_at`, `created_at`, `updated_at`) VALUES
 (1, 1, 'pending@checkout.stripe', NULL, 'cs_test_a1Xz7XYKLmtqKWpuQ4KIZ5HE0lojk4Kuxg2VMaFQiVy37mDM6pOAaHaoA8', NULL, 9.99, 'usd', 'pending', 'zYegLWcYYjrB8KfgUmXS5WrOLSzJiw0VYDHHGfuTqAib16WPVLB7ZUTJBwzO5R2t', NULL, '2026-06-12 17:29:33', '2026-06-12 17:29:33'),
-(2, 3, 'pending@checkout.stripe', NULL, 'cs_test_a12kLXG9H0E5k3fzsQ3yiTmT5Qo5mutMTTMoTqm6sU9L3Af3HNwyrkshVv', NULL, 14.99, 'usd', 'pending', 'uwjL2Taj3j2TI40Ko1AIc9hPi9AGuVuDvTkTxrj6ZWzpfP7stAUHkT7FDCEkhcrS', NULL, '2026-06-12 17:45:27', '2026-06-12 17:45:27');
+(2, 3, 'pending@checkout.stripe', NULL, 'cs_test_a12kLXG9H0E5k3fzsQ3yiTmT5Qo5mutMTTMoTqm6sU9L3Af3HNwyrkshVv', NULL, 14.99, 'usd', 'pending', 'uwjL2Taj3j2TI40Ko1AIc9hPi9AGuVuDvTkTxrj6ZWzpfP7stAUHkT7FDCEkhcrS', NULL, '2026-06-12 17:45:27', '2026-06-12 17:45:27'),
+(3, 4, 'porivus@mailinator.com', 'Hanna Hart', 'cs_test_a17b3L8oECElfIFcyVZ8qHESfE7ndM29Xi8VEitWXyNxyId7rj3g6lijdI', 'pi_3TheXLLXqt7gmBJh16AbbupS', 11.99, 'usd', 'paid', 'W2qPbyo0IkUAX5lMS3CoxFrsSvr79QDnGKzfeLGd7NT6mdIVpNVUeoAlgumZkGk8', '2026-06-12 18:31:07', '2026-06-12 18:26:51', '2026-06-12 18:31:07'),
+(4, 2, 'admin@admin.com', 'Hilel Riddle', 'pi_3ThemkLXqt7gmBJh1x9sd2CY', 'pi_3ThemkLXqt7gmBJh1x9sd2CY', 12.99, 'usd', 'paid', 'Folx18303U7wo0PZhvUcCrIOGOuVV1ne4hSAQzed6q06hl2uw9xuldpNzrC86Ha0', '2026-06-12 18:46:57', '2026-06-12 18:46:48', '2026-06-12 18:46:57');
 
 -- --------------------------------------------------------
 
@@ -1629,7 +1631,7 @@ ALTER TABLE `books`
 -- AUTO_INCREMENT for table `book_orders`
 --
 ALTER TABLE `book_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `brands`

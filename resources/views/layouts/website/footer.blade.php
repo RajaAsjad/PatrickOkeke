@@ -13,9 +13,17 @@
             </ul>
         </div>
         <div data-anim="left" data-delay="160">
-            <p class="eyebrow eyebrow--muted">Correspondence</p>
-            <p style="margin-top:16px;font-size:.875rem"><a href="mailto:hello@patrickokeke.com">hello@patrickokeke.com</a></p>
-            <p class="text-muted" style="margin-top:4px;font-size:.875rem">For press, speaking and rights inquiries.</p>
+            <p class="eyebrow eyebrow--muted">Contact</p>
+            <p style="margin-top:16px;font-size:.875rem;line-height:1.6">
+                4445 Willard Ave, Ste. 600<br>
+                Chevy Chase, MD 20815
+            </p>
+            <p style="margin-top:12px;font-size:.875rem"><a href="mailto:info@baezepi.com">info@baezepi.com</a></p>
+            <p style="margin-top:8px;font-size:.875rem">
+                <a href="tel:+13016370818">301 637 0818</a><br>
+                <span class="text-muted">Main:</span> <a href="tel:+13013631154">301 363 1154</a><br>
+                <span class="text-muted">Fax:</span> <a href="tel:+12272560003">227 256 0003</a>
+            </p>
         </div>
     </div>
     <div class="site-footer__bottom" data-anim="fade" data-delay="200">
