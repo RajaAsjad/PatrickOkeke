@@ -7,14 +7,7 @@
     <title>@yield('title')</title>
     <meta name="description" content="@yield('meta_description')">
     <meta name="keywords" content="@yield('keywords')">
-    @php
-        $fav = trim($home_page_data['header_favicon'] ?? '');
-    @endphp
-    @if ($fav !== '')
-        <link rel="icon" href="{{ asset('admin/assets/images/page/' . $fav) }}" type="image/png">
-    @else
-        <link rel="icon" href="{{ asset('assets/website/favicon-po.svg') }}" type="image/svg+xml">
-    @endif
+    <link rel="icon" href="{{ asset('public/admin/assets/images/page') }}/{{ $home_page_data['header_favicon'] }}" type="image/png" sizes="32x32">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">

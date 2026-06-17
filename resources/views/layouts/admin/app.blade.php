@@ -7,29 +7,7 @@
     <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}" />
-    @php
-        $adminFav = trim($home_page_data['header_favicon'] ?? '');
-        $adminFavExt = $adminFav !== '' ? strtolower(pathinfo($adminFav, PATHINFO_EXTENSION)) : '';
-        $adminFavMime = match ($adminFavExt) {
-            'png' => 'image/png',
-            'jpg', 'jpeg' => 'image/jpeg',
-            'gif' => 'image/gif',
-            'ico' => 'image/x-icon',
-            'svg' => 'image/svg+xml',
-            'webp' => 'image/webp',
-            default => '',
-        };
-    @endphp
-    @if ($adminFav !== '')
-        <link rel="apple-touch-icon" sizes="180x180"
-            href="{{ asset('admin/assets/images/page/' . $adminFav) }}">
-        <link rel="icon" href="{{ asset('admin/assets/images/page/' . $adminFav) }}"
-            @if ($adminFavMime !== '') type="{{ $adminFavMime }}" @endif sizes="32x32">
-    @else
-        <link rel="icon" href="{{ asset('assets/website/favicon-po.svg') }}" type="image/svg+xml"
-            sizes="any">
-        <link rel="apple-touch-icon" href="{{ asset('assets/website/favicon-po.svg') }}">
-    @endif
+    <link rel="icon" href="{{ asset('public/admin/assets/images/page') }}/{{ $home_page_data['header_favicon'] }}" type="image/png" sizes="32x32">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">

@@ -109,7 +109,7 @@
 					</tr>
 					<tr>
 						<th>Venue/Event</th>
-						<td>{{ $model->address ?? '—' }}</td>
+						<td>{{ $model->address ?? '-' }}</td>
 					</tr>
 					<tr>
 						<th>Message</th>
@@ -117,7 +117,7 @@
 					</tr>
 					<tr>
 						<th>Date</th>
-						<td>{{ $model->created_at ? \Carbon\Carbon::parse($model->created_at)->format('d F Y, h:i A') : '—' }}</td>
+						<td>{{ $model->created_at ? \Carbon\Carbon::parse($model->created_at)->format('d F Y, h:i A') : '-' }}</td>
 					</tr>
 				</table>
 			</div>

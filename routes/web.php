@@ -43,7 +43,7 @@ Route::post('/admin/profile/update', 'admin\AdminController@updateProfile')->nam
 Route::post('admin/logout', 'admin\AdminController@logOut')->name('admin.logout');
 
 
-// Frontend — Phoenix Neat Space Cleaning
+// Frontend routes
 Route::get('/', [WebController::class, 'Index'])->name('index'); 
 Route::get('about', [WebController::class, 'About'])->name('about');
 Route::get('books', [WebController::class, 'Books'])->name('books');

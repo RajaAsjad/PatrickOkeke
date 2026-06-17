@@ -19,11 +19,7 @@
 							<a href="{{ route('page.index') }}" class="btn btn-sm">
 								<i class="fa fa-arrow-left"></i> Back
 							</a>
-						</div>
-
-						@if (session('message'))
-						<div class="page-setting-alert home-about-alert">{{ session('message') }}</div>
-						@endif
+						</div> 
 
 						<div class="section-block">
 							 
@@ -32,12 +28,16 @@
 								<input type="text" id="home_about_title" name="home_about_title" class="form-control" value="{{ isset($page_data['home_about_title']) ? $page_data['home_about_title'] : '' }}" placeholder="Enter title">
 							</div>
 							<div class="form-group">
+								<label for="home_about_title">About Heading</label>
+								<input type="text" id="home_about_heading" name="home_about_heading" class="form-control" value="{{ isset($page_data['home_about_heading']) ? $page_data['home_about_heading'] : '' }}" placeholder="Enter heading">
+							</div>
+							<div class="form-group">
 								<label for="home_about_description">Description</label>
 								<textarea id="home_about_description" name="home_about_description" class="form-control texteditor" cols="30" rows="10" placeholder="Enter description">{!! isset($page_data['home_about_description']) ? $page_data['home_about_description'] : '' !!}</textarea>
 							</div> 
 						</div>
 
-						<div class="section-block"> 
+						{{-- <div class="section-block"> 
 							<div class="form-group">
 								<label>Bullet points</label>
 								<div id="bullet-points-wrap">
@@ -54,7 +54,7 @@
 								</div>
 								<button type="button" id="btn-add-bullet" class="btn btn-sm"><i class="fa fa-plus"></i> Add bullet point</button>
 							</div>
-						</div>
+						</div> --}}
 
 						<div class="section-block">
 							 
@@ -63,7 +63,7 @@
 								<input type="file" id="home_about_image" name="home_about_image" class="form-control" accept="image/*">
 								@if(isset($page_data['home_about_image']) && $page_data['home_about_image'])
 									<div style="margin-top: 12px;">
-										<img src="{{ asset('admin/assets/images/page/' . $page_data['home_about_image']) }}" class="existing-photo" alt="Current" style="height: 100px;">
+										<img src="{{ asset('public/admin/assets/images/page/' . $page_data['home_about_image']) }}" class="existing-photo" alt="Current" style="height: 100px;">
 									</div>
 								@endif
 							</div>

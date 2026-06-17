@@ -16,7 +16,7 @@
                 <div class="col-lg-7">
                     <p>Want to work with us? We are hiring cleaners. You must have <strong>two years of professional
                             cleaning experience</strong> and be able to pass a <strong>background check</strong>.</p>
-                    <p class="text-muted small">Submit the form below — your message is routed the same as our contact
+                    <p class="text-muted small">Submit the form below. Your message is routed the same as our contact
                         form so recruiting can follow up.</p>
 
                     <form id="hiring-form" class="booking-form mt-4" action="{{ route('contactus.store') }}" method="post">
@@ -77,7 +77,7 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Application received',
-                                text: res.message || 'Thank you — we will be in touch.',
+                                text: res.message || 'Thank you. We will be in touch.',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 showConfirmButton: false

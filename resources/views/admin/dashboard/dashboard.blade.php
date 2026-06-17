@@ -213,7 +213,7 @@
         <div class="pg-dash__banner">
             <div class="pg-dash__welcome">
                 <h1 class="pg-dash__welcome-title">Welcome,<br>Patrick Okeke</h1>
-                <p class="pg-dash__welcome-subtitle">Author site — admin desk</p>
+                <p class="pg-dash__welcome-subtitle">Author site admin desk</p>
             </div>
         </div>
 

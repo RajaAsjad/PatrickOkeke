@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2026 at 07:20 PM
+-- Generation Time: Jun 18, 2026 at 12:03 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -103,7 +103,7 @@ INSERT INTO `books` (`id`, `title`, `slug`, `subtitle`, `category`, `year`, `des
 (2, 'Boosting the Size of Sale', 'boosting-the-size-of-sale', 'An in-depth look at the qualities of a good influencer', 'Business', '2024', 'A practical guide to modern persuasion — what makes a voice trusted, a message sticky, and a sale inevitable in the influencer economy.', 'A practical guide to modern persuasion — what makes a voice trusted, a message sticky, and a sale inevitable in the influencer economy.', 'book-boosting-sale-B9xmqxqR.png', '20260612222859_boosting-the-size-of-sale-manuscript.pdf', 'pdf', 12.99, 1, 1, 2, '2026-06-12 17:28:44', '2026-06-12 17:28:59'),
 (3, 'CEOs of TikTok', 'ceos-of-tiktok', 'Build New Paradigms of Life and Tech', 'Technology', '2025', 'How a new generation of founders is rewriting the rules of leadership, attention, and creative power in a vertical-video world.', 'How a new generation of founders is rewriting the rules of leadership, attention, and creative power in a vertical-video world.', 'book-ceos-tiktok-BTyhDE6Y.png', '20260612222859_ceos-tiktok.pdf', 'pdf', 14.99, 1, 1, 3, '2026-06-12 17:28:44', '2026-06-12 17:28:59'),
 (4, 'IQ — An Overrated Quotient', 'iq-an-overrated-quotient', 'Where creativity meets the technical', 'Essays', '2025', 'On the combination of creative and technical thinking — the real foundation of a project, an idea, a life worth building.', 'On the combination of creative and technical thinking — the real foundation of a project, an idea, a life worth building.', 'book-iq-quotient-BO-q7Rls.png', '20260612222859_iq-an-overrated-quotient-manuscript--1-.pdf', 'pdf', 11.99, 1, 1, 4, '2026-06-12 17:28:44', '2026-06-12 17:28:59'),
-(5, 'The Dogged Spirit of Success', 'the-dogged-spirit-of-success', 'Persistence, purpose, and the path to lasting achievement', 'Self-Development', '2025', 'A reflection on resilience, discipline, and the mindset required to turn ambition into enduring success.', 'A reflection on resilience, discipline, and the mindset required to turn ambition into enduring success.', NULL, '20260612222859_the-dogged-spirit-of-success-cover.pdf', 'pdf', 10.99, 0, 1, 5, '2026-06-12 17:28:44', '2026-06-12 17:28:59');
+(5, 'The Dogged Spirit of Success', 'the-dogged-spirit-of-success', 'Persistence, purpose, and the path to lasting achievement', 'Self-Development', '2025', 'A reflection on resilience, discipline, and the mindset required to turn ambition into enduring success.', 'A reflection on resilience, discipline, and the mindset required to turn ambition into enduring success.', 'book-the-dogged-spirit-of-success-1781733660.jpg', '20260612222859_the-dogged-spirit-of-success-cover.pdf', 'pdf', 10.99, 0, 1, 5, '2026-06-12 17:28:44', '2026-06-17 17:01:00');
 
 -- --------------------------------------------------------
 
@@ -506,7 +506,7 @@ INSERT INTO `page_settings` (`id`, `parent_slug`, `key`, `value`, `deleted_at`, 
 (1, 'header', '_token', 'dfYLVJ7m5v909OKmOxjUbLtzYSLynv6Oq2e2YJiJ', NULL, '2022-06-03 18:31:33', '2026-02-20 12:30:05'),
 (2, 'header', 'parent_slug', 'header', NULL, '2022-06-03 18:31:33', '2022-06-03 18:31:33'),
 (3, 'header', 'form_blog', NULL, NULL, '2022-06-03 18:31:33', '2022-06-03 18:31:33'),
-(4, 'header', 'header_favicon', '', NULL, '2022-06-03 18:31:33', '2026-04-16 14:36:42'),
+(4, 'header', 'header_favicon', '17062026213816.svg', NULL, '2022-06-03 18:31:33', '2026-06-17 16:38:16'),
 (5, 'header', 'header_logo', '', NULL, '2022-06-03 18:31:33', '2026-04-16 14:36:57'),
 (6, 'footer', '_token', 'xEi2jZ3Kr1YPMfDlXuClmqFqa1bzdcXjay8JAo4b', NULL, '2022-06-03 18:41:30', '2023-05-18 17:45:43'),
 (7, 'footer', 'parent_slug', 'footer', NULL, '2022-06-03 18:41:30', '2022-06-03 18:41:30'),
@@ -601,9 +601,9 @@ INSERT INTO `page_settings` (`id`, `parent_slug`, `key`, `value`, `deleted_at`, 
 (158, 'contact-us', 'form_contact', NULL, NULL, '2022-09-07 16:02:46', '2022-09-07 16:02:46'),
 (159, 'home-about', '_token', 'BMbTSiusxUNjI6iKXSbJiLbwoQspZUBAgIU9k6if', NULL, '2022-10-06 18:22:20', '2022-10-06 18:22:20'),
 (160, 'home-about', 'parent_slug', 'home-about', NULL, '2022-10-06 18:22:20', '2022-10-06 18:22:20'),
-(161, 'home-about', 'home_about_title', NULL, NULL, '2022-10-06 18:22:20', '2026-04-29 17:14:24'),
-(162, 'home-about', 'home_about_heading', 'We Plan The Most Beautiful Event And Organized That Event', NULL, '2022-10-06 18:22:20', '2022-10-06 18:29:58'),
-(163, 'home-about', 'home_about_description', NULL, NULL, '2022-10-06 18:22:20', '2026-04-29 17:14:24'),
+(161, 'home-about', 'home_about_title', 'About the author', NULL, '2022-10-06 18:22:20', '2026-06-17 16:34:42'),
+(162, 'home-about', 'home_about_heading', 'Writing is how I think out loud, slowly, on paper.', NULL, '2022-10-06 18:22:20', '2026-06-17 16:34:42'),
+(163, 'home-about', 'home_about_description', '<p class=\"text-body\">For more than a decade, I\'ve written books and essays at the seam where culture meets technology, where individual identity meets collective story. My work is an attempt to take the noise of the present and translate it into something a reader can hold in their hands.</p>\r\n<p class=\"text-body\">Each book on this shelf is a small argument with the world. Some are practical, some are personal, all of them are honest.</p>', NULL, '2022-10-06 18:22:20', '2026-06-17 16:34:42'),
 (164, 'home-about', 'form_about', NULL, NULL, '2022-10-06 18:22:20', '2022-10-06 18:22:20'),
 (165, 'home-about', 'short_description', 'Carmalita M Mcqueen', NULL, '2022-10-06 18:28:24', '2022-10-06 18:29:58'),
 (166, 'about-us', 'aboutus_heading', 'ABOUT ME', NULL, '2022-10-10 12:15:30', '2022-10-10 14:17:00'),
@@ -622,8 +622,8 @@ INSERT INTO `page_settings` (`id`, `parent_slug`, `key`, `value`, `deleted_at`, 
 (182, 'contact-us', 'contact_phone', '+0112345678', NULL, '2022-10-24 16:24:32', '2022-10-24 16:24:32'),
 (183, 'contact-us', 'contact_email', 'Info@ourinfomail.com', NULL, '2022-10-24 16:24:32', '2022-10-24 16:24:32'),
 (184, 'home-about', 'home_about_bullets', '[null]', NULL, '2026-02-24 14:07:20', '2026-04-29 17:14:24'),
-(185, 'home-about', 'home_about_image', '24022026191319.png', NULL, '2026-02-24 14:13:19', '2026-02-24 14:13:19'),
-(186, 'home-about', 'home_about_active_status', '1', NULL, '2026-02-24 14:25:09', '2026-02-24 15:06:28'),
+(185, 'home-about', 'home_about_image', '17062026213506.jpg', NULL, '2026-02-24 14:13:19', '2026-06-17 16:35:06'),
+(186, 'home-about', 'home_about_active_status', '1', NULL, '2026-02-24 14:25:09', '2026-06-17 16:58:39'),
 (187, 'latest-news', 'latest_news_title', '2026 Future assignments', NULL, '2026-03-03 12:46:26', '2026-03-03 12:46:26'),
 (188, 'latest-news', 'latest_news_description', NULL, NULL, '2026-03-03 12:46:26', '2026-03-03 12:54:43'),
 (189, 'latest-news', 'latest_news_bullets', '[\"Enchantment of the Seas ; Royal Caribbean out of Tampa Jan31-April 25 2026\",\"Vision of the Seas Aug 1st-Sept 24 2024\",\"Jane McDonald Charter Cruise 2-9th Oct 2026\",\"Yeadon Town hall Christmas show Dec 5 2026 ( In discussion -not confirmed )\"]', NULL, '2026-03-03 12:46:27', '2026-03-03 12:46:27'),
@@ -663,7 +663,6 @@ INSERT INTO `page_settings` (`id`, `parent_slug`, `key`, `value`, `deleted_at`, 
 (223, 'schedule-shop-contact', 'schedule_shop_contact_usa_image', '14032026000810.png', NULL, '2026-03-13 19:08:10', '2026-03-13 19:08:10'),
 (224, 'schedule-shop-contact', 'schedule_shop_contact_bottom_image', '14032026000907.png', NULL, '2026-03-13 19:09:07', '2026-03-13 19:09:07'),
 (225, 'header', 'form_header', NULL, NULL, '2026-03-27 17:50:54', '2026-03-27 17:50:54'),
-(226, 'shows-appearances', 'home_about_title', 'Shows & Appearances', NULL, '2026-04-03 19:27:52', '2026-04-03 19:27:52'),
 (227, 'shows-appearances', 'shows_appearances_left_video', 'https://www.youtube.com/embed/yz1VumL5IL0', NULL, '2026-04-03 19:27:52', '2026-04-03 20:13:52'),
 (228, 'shows-appearances', 'shows_appearances_right_video', 'https://www.youtube.com/embed/zcBu7_TqAXA', NULL, '2026-04-03 19:27:52', '2026-04-03 20:14:19'),
 (229, 'shows-appearances', 'shows_appearances_active_status', '1', NULL, '2026-04-03 19:27:52', '2026-04-03 19:27:52'),

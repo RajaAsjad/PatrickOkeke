@@ -217,7 +217,7 @@ blockquote.quote footer{margin-top:8px;font-size:.75rem;text-transform:uppercase
 
 .cta-row{margin-top:48px;display:flex;flex-wrap:wrap;gap:16px}
 
-/* —— Animations (varied per element) —— */
+/* Animations (varied per element) */
 @keyframes header-drop{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:translateY(0)}}
 @keyframes hero-line-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes hero-rise{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}

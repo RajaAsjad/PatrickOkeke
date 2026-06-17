@@ -223,14 +223,14 @@
 		outline: none;
 		box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.25);
 	}
-	/* Publish (visible) selected — pink, white icon */
+	/* Publish (visible) selected: pink, white icon */
 	.video-status-eye-btn.is-selected[data-status="1"] {
 		background: var(--pg-pink);
 		border-color: var(--pg-pink);
 		color: #fff;
 		box-shadow: 0 2px 10px rgba(236, 72, 153, 0.35);
 	}
-	/* Draft (hidden) selected — white, grey ring, dark icon */
+	/* Draft (hidden) selected: white, grey ring, dark icon */
 	.video-status-eye-btn.is-selected[data-status="0"] {
 		background: #fff;
 		border-color: #9ca3af;

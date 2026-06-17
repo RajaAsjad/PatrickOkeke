@@ -6,7 +6,7 @@
     <section class="page-hero">
         <div class="container-pns">
             <h1>Pricing</h1>
-            <p>Every property is different — we build a scope and schedule that fits yours.</p>
+            <p>Every property is different. We build a scope and schedule that fits yours.</p>
         </div>
     </section>
 

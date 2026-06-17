@@ -253,7 +253,7 @@
 									<td>{{ $model->first_name }} {{ $model->last_name }}</td>
 									<td>{{ $model->email }}</td>
 									<td>{{ $model->phone }}</td>
-									<td>{{ $model->address ?? '—' }}</td>
+									<td>{{ $model->address ?? '-' }}</td>
 									<td>{{ \Illuminate\Support\Str::limit($model->message, 50) }}</td>
 									<td>
 										<div class="contact-action-btns">

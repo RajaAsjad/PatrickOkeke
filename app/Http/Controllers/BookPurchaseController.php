@@ -27,7 +27,7 @@ class BookPurchaseController extends Controller
                 ->with('error', 'Payment is not configured. Please contact the author.');
         }
 
-        $page_title = 'Checkout — '.$book->title;
+        $page_title = 'Checkout | '.$book->title;
 
         return view('website.book-checkout', compact('book', 'page_title'));
     }
@@ -149,7 +149,7 @@ class BookPurchaseController extends Controller
         return view('website.purchase-success', [
             'book' => $book,
             'order' => $order,
-            'page_title' => 'Purchase Complete — '.$book->title,
+            'page_title' => 'Purchase Complete | '.$book->title,
         ]);
     }
 
@@ -200,7 +200,7 @@ class BookPurchaseController extends Controller
         return view('website.purchase-success', [
             'book' => $book,
             'order' => $order,
-            'page_title' => 'Purchase Complete — '.$book->title,
+            'page_title' => 'Purchase Complete | '.$book->title,
         ]);
     }
 

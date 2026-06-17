@@ -285,8 +285,8 @@
 										<img src="{{ asset('admin/assets/images/default.jpg') }}" alt="No Image">
 										@endif
 									</td>
-									<td>{{ $banner->slug ? ucfirst(str_replace('-', ' ', $banner->slug)) : '—' }}</td>
-									<td>{{ $banner->title ?? '—' }}</td>
+									<td>{{ $banner->slug ? ucfirst(str_replace('-', ' ', $banner->slug)) : '-' }}</td>
+									<td>{{ $banner->title ?? '-' }}</td>
 									<td>{{ $banner->heading }}</td>
 									<td>
 										@if($banner->status)

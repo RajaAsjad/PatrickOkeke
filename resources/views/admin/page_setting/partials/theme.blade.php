@@ -135,8 +135,7 @@
 
 	.page-setting-shell .form-control {
 		border: 2px solid #e7e5e4;
-		border-radius: 8px;
-		padding: 8px 12px;
+		border-radius: 8px; 
 		font-size: 14px;
 		line-height: 1.6;
 		transition: all 0.3s ease;

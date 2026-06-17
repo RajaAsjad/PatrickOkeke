@@ -18,11 +18,7 @@
 							<a href="{{ route('page.index') }}" class="btn btn-sm">
 								<i class="fa fa-arrow-left"></i> Back
 							</a>
-						</div>
-
-						@if (session('message'))
-						<div class="page-setting-alert header-settings-alert">{{ session('message') }}</div>
-						@endif
+						</div> 
 
 						<div class="section-block">
 							<div class="section-heading">
@@ -35,7 +31,7 @@
 								<small class="form-hint">Recommended size: 32×32 or 16×16 pixels (PNG, ICO, or SVG)</small>
 								@if (isset($page_data['header_favicon']))
 								<div class="image-preview-container">
-									<img src="{{ asset('admin/assets/images/page/' . $page_data['header_favicon']) }}" class="existing-photo" style="height:50px;" alt="Current Favicon">
+									<img src="{{ asset('public/admin/assets/images/page/' . $page_data['header_favicon']) }}" class="existing-photo" style="height:50px;" alt="Current Favicon">
 								</div>
 								@endif
 							</div>
@@ -46,13 +42,13 @@
 								<small class="form-hint">Recommended: PNG with transparent background</small>
 								@if (isset($page_data['header_logo']))
 								<div class="image-preview-container">
-									<img src="{{ asset('admin/assets/images/page/' . $page_data['header_logo']) }}" class="existing-photo" style="height:100px;" alt="Current Logo">
+									<img src="{{ asset('public/admin/assets/images/page/' . $page_data['header_logo']) }}" class="existing-photo" style="height:100px;" alt="Current Logo">
 								</div>
 								@endif
 							</div>
 						</div>
 
-						<div class="section-block">
+						{{-- <div class="section-block">
 							<div class="section-heading">
 								<h4><i class="fa fa-share-alt"></i> Social Media Links</h4>
 							</div>
@@ -73,7 +69,7 @@
 								<input type="url" id="footer_twitter" name="footer_twitter" class="form-control" value="{{ isset($page_data['footer_twitter']) ? $page_data['footer_twitter'] : '' }}" placeholder="https://twitter.com/yourhandle">
 							</div>
 						</div>
-						</div>
+						</div> --}}
 
 						<div class="action-section">
 							<button type="submit" class="btn-update" name="form_header">

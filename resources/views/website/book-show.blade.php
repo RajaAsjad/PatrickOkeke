@@ -5,7 +5,7 @@
 @section('content')
 <section class="page-hero bg-warm paper-grain">
     <div class="container">
-        <p class="eyebrow anim-page-eyebrow">{{ $book->category }} @if($book->year)— {{ $book->year }}@endif</p>
+        <p class="eyebrow anim-page-eyebrow">{{ $book->category }}@if($book->year) · {{ $book->year }}@endif</p>
         <h1 class="display-h1 anim-page-h1" style="margin-top:16px">{{ $book->title }}</h1>
         @if($book->subtitle)
         <p class="text-lead anim-page-lead" style="margin-top:16px;font-style:italic">{{ $book->subtitle }}</p>

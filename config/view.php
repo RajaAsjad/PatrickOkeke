@@ -29,7 +29,7 @@ return [
     */
 
     /*
-     * Must never be empty — hosting .env sometimes has VIEW_COMPILED_PATH=
+     * Must never be empty. Hosting .env sometimes has VIEW_COMPILED_PATH=
      * which makes env() return '' and triggers "Please provide a valid cache path."
      */
     'compiled' => env('VIEW_COMPILED_PATH') ?: storage_path('framework/views'),

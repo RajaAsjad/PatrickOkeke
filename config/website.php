@@ -16,7 +16,7 @@ return [
             'category' => 'Business',
             'year' => '2024',
             'cover' => 'book-boosting-sale-B9xmqxqR.png',
-            'description' => 'A practical guide to modern persuasion — what makes a voice trusted, a message sticky, and a sale inevitable in the influencer economy.',
+                'description' => 'A practical guide to modern persuasion: what makes a voice trusted, a message sticky, and a sale inevitable in the influencer economy.',
         ],
         [
             'title' => 'CEOs of TikTok',
@@ -27,12 +27,12 @@ return [
             'description' => 'How a new generation of founders is rewriting the rules of leadership, attention, and creative power in a vertical-video world.',
         ],
         [
-            'title' => 'IQ — An Overrated Quotient',
+            'title' => 'IQ: An Overrated Quotient',
             'subtitle' => 'Where creativity meets the technical',
             'category' => 'Essays',
             'year' => '2025',
             'cover' => 'book-iq-quotient-BO-q7Rls.png',
-            'description' => 'On the combination of creative and technical thinking — the real foundation of a project, an idea, a life worth building.',
+                'description' => 'On the combination of creative and technical thinking: the real foundation of a project, an idea, a life worth building.',
         ],
     ],
 ];

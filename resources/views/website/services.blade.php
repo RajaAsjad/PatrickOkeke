@@ -49,19 +49,19 @@
                     <p class="mb-0"><strong>Frequency:</strong> Daily, weekly, or multiple times a week.</p>
                 </div>
                 <div class="tab-pane fade" id="pane-ret" role="tabpanel">
-                    <p>Retail janitorial for stores, franchises, and shops — your sales floor and restrooms reflect your
+                    <p>Retail janitorial for stores, franchises, and shops. Your sales floor and restrooms reflect your
                         brand. We provide dust mopping, floor mopping, scrubber floor care, wipe-down surfaces, restroom
                         care for all restrooms, window and door cleaning, and emptying trash bins.</p>
                     <p class="mb-0"><strong>Frequency:</strong> Daily, weekly, or multiple times a week.</p>
                 </div>
                 <div class="tab-pane fade" id="pane-post" role="tabpanel">
                     <p>Our experienced cleaners are no stranger to getting the job done. Need a whole construction site
-                        clean? Call us — we have already got it covered.</p>
+                        clean? Call us. We have already got it covered.</p>
                     <p class="mb-0"><strong>Frequency:</strong> As needed.</p>
                 </div>
                 <div class="tab-pane fade" id="pane-move" role="tabpanel">
                     <p>No need to stress about getting your property ready for the next tenant. We quickly and efficiently
-                        make sure all surfaces are shiny, floors are spotless, and walls are presentable — for
+                        make sure all surfaces are shiny, floors are spotless, and walls are presentable for
                         apartments, homes, and duplexes.</p>
                     <p class="mb-0"><strong>Frequency:</strong> As needed.</p>
                 </div>

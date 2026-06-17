@@ -12,7 +12,7 @@
         <div>
             <p class="eyebrow-row anim-hero-line">An author's library</p>
             <h1 class="display-h1 anim-hero-h1" style="margin-top:24px">Stories, ideas <span class="text-italic-accent">&amp;</span> the long quiet work of writing.</h1>
-            <p class="text-lead anim-hero-lead" style="margin-top:32px">I'm <strong>Patrick Okeke</strong> — a writer tracing the lines between culture, technology and the inner craft of building a thinking life. Welcome to my shelf.</p>
+            <p class="text-lead anim-hero-lead" style="margin-top:32px">I'm <strong>Patrick Okeke</strong>, a writer tracing the lines between culture, technology and the inner craft of building a thinking life. Welcome to my shelf.</p>
             <div class="cta-row anim-hero-cta" style="margin-top:40px">
                 <a href="{{ route('books') }}" class="btn-primary">Explore the Books <span aria-hidden="true">→</span></a>
                 <a href="{{ route('about') }}" class="btn-link">Meet the author</a>
@@ -36,26 +36,29 @@
         </div>
     </div>
 </section>
-
-<section class="section">
-    <div class="container split-grid">
-        <div data-anim="left">
-            <div class="portrait-wrap portrait-wrap--gray portrait-wrap--anim portrait-wrap--ken">
-                <img src="{{ $img }}/author-portrait-DvaXpeCp.jpg" alt="Portrait of Patrick Okeke at his writing desk" width="1024" height="1280" loading="lazy">
+@php
+    $aboutSectionActive = isset($home_page_data['home_about_active_status']) && $home_page_data['home_about_active_status'] === '1' || $home_page_data['home_about_active_status'] === 1;
+@endphp
+@if($aboutSectionActive && !empty($home_page_data['home_about_image']))
+    <section class="section">
+        <div class="container split-grid">
+            <div data-anim="left">
+                <div class="portrait-wrap portrait-wrap--gray portrait-wrap--anim portrait-wrap--ken">
+                    <img src="{{ asset('public/admin/assets/images/page/' . $home_page_data['home_about_image']) }}" alt="Portrait of Patrick Okeke at his writing desk" width="1024" height="1280" loading="lazy">
+                </div>
+            </div>
+            <div class="split-grid__content" data-anim="right" data-delay="120">
+                <p class="eyebrow">{{ $home_page_data['home_about_title'] }}</p>
+                <h2 class="display-h2" style="margin-top:16px">{!! $home_page_data['home_about_heading'] !!}</h2>
+                <div class="prose-block">
+                    <p class="text-body">{!! $home_page_data['home_about_description'] !!}</p>
+                    
+                </div>
+                <a href="{{ route('about') }}" class="btn-link" style="margin-top:32px;display:inline-flex">Read the full story <span aria-hidden="true">→</span></a>
             </div>
         </div>
-        <div class="split-grid__content" data-anim="right" data-delay="120">
-            <p class="eyebrow">About the author</p>
-            <h2 class="display-h2" style="margin-top:16px">Writing is how I think out loud — slowly, on paper.</h2>
-            <div class="prose-block">
-                <p class="text-body">For more than a decade, I've written books and essays at the seam where culture meets technology, where individual identity meets collective story. My work is an attempt to take the noise of the present and translate it into something a reader can hold in their hands.</p>
-                <p class="text-body">Each book on this shelf is a small argument with the world. Some are practical, some are personal, all of them are honest.</p>
-            </div>
-            <a href="{{ route('about') }}" class="btn-link" style="margin-top:32px;display:inline-flex">Read the full story <span aria-hidden="true">→</span></a>
-        </div>
-    </div>
-</section>
-
+    </section>
+@endif
 <section class="section section--border-y section--muted">
     <div class="container">
         <div class="section-head" data-anim="fade">

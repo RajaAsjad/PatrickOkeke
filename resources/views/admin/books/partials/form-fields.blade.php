@@ -66,20 +66,20 @@
 					<input type="file" name="cover" accept="image/*">
 					<div class="book-upload-zone__icon"><i class="fa fa-image"></i></div>
 					<div class="book-upload-zone__text">Click to upload cover</div>
-					<div class="book-upload-zone__hint">PNG, JPG — recommended 400×600px</div>
+					<div class="book-upload-zone__hint">PNG, JPG. Recommended 400×600px</div>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label>Book file (PDF or EPUB)</label>
 				@if($isEdit && $model->file_path)
-					<p class="help-block help-block--success"><i class="fa fa-check-circle"></i> {{ strtoupper($model->file_type) }} file uploaded — customers can download after purchase</p>
+					<p class="help-block help-block--success"><i class="fa fa-check-circle"></i> {{ strtoupper($model->file_type) }} file uploaded. Customers can download after purchase.</p>
 				@endif
 				<div class="book-upload-zone">
 					<input type="file" name="file" accept=".pdf,.epub">
 					<div class="book-upload-zone__icon"><i class="fa fa-file-text-o"></i></div>
 					<div class="book-upload-zone__text">{{ $isEdit && $model->file_path ? 'Replace file' : 'Upload PDF or EPUB' }}</div>
-					<div class="book-upload-zone__hint">Max 50 MB — delivered after Stripe payment</div>
+					<div class="book-upload-zone__hint">Max 50 MB. Delivered after Stripe payment.</div>
 				</div>
 			</div>
 

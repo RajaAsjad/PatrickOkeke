@@ -20,7 +20,7 @@
 			<div class="book-form-body">
 				<div class="book-form-banner">
 					<h3>Edit Book</h3>
-					<p>Update "{{ $model->title }}" — changes reflect on the website immediately</p>
+					<p>Update "{{ $model->title }}". Changes reflect on the website immediately.</p>
 				</div>
 
 				@include('admin.books.partials.form-fields', ['model' => $model])

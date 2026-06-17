@@ -7,7 +7,7 @@
     <div class="container--narrow">
         <p class="eyebrow anim-page-eyebrow">Correspondence</p>
         <h1 class="display-h1 anim-page-h1" style="margin-top:16px">Write to me. I read every letter.</h1>
-        <p class="text-lead anim-page-lead" style="margin-top:24px">The best way to reach me is the slow way — a thoughtful note, answered when the desk allows.</p>
+        <p class="text-lead anim-page-lead" style="margin-top:24px">The best way to reach me is the slow way: a thoughtful note, answered when the desk allows.</p>
     </div>
 </section>
 

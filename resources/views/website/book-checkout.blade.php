@@ -201,7 +201,7 @@
         <div class="checkout-book__inner">
             <a href="{{ route('books.show', $book->slug) }}" class="checkout-back">← Back to book</a>
             <img src="{{ $book->coverUrl() }}" alt="{{ $book->title }}" class="checkout-book__cover">
-            <p class="eyebrow">{{ $book->category }} @if($book->year)— {{ $book->year }}@endif</p>
+            <p class="eyebrow">{{ $book->category }}@if($book->year) · {{ $book->year }}@endif</p>
             <h1 class="checkout-book__title">{{ $book->title }}</h1>
             @if($book->subtitle)
             <p class="checkout-book__sub">{{ $book->subtitle }}</p>

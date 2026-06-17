@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const input = form.querySelector('input[type="email"]');
       if (input) input.value = '';
-      alert('Thank you — you are on the list.');
+      alert('Thank you. You are on the list.');
     });
   });
 

@@ -79,7 +79,7 @@
         <p class="eyebrow">Thank you</p>
         <h1 class="display-h2" style="margin-top:12px">Your purchase is complete</h1>
         <p class="text-lead text-balance" style="margin:20px auto 0">
-            You now have access to <strong>{{ $book->title }}</strong>. Download your copy below — save the link if you need it again.
+            You now have access to <strong>{{ $book->title }}</strong>. Download your copy below and save the link if you need it again.
         </p>
         <div class="purchase-success__actions">
             <a href="{{ route('book.download', $order->download_token) }}" class="purchase-success__download">

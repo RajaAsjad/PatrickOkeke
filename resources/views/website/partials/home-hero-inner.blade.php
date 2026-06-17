@@ -1,4 +1,4 @@
-{{-- Shared hero copy — layout aligned to home banner reference --}}
+{{-- Shared hero copy: layout aligned to home banner reference --}}
 <div class="home-hero__content">
     <p class="home-hero__badge">
         <i class="fas fa-shield-halved home-hero__badge-icon" aria-hidden="true"></i>
