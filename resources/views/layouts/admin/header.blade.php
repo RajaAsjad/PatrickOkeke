@@ -1,15 +1,10 @@
 <header class="main-header admin-header">
     <a href="{{ route('dashboard') }}" class="header-logo-link" aria-label="Patrick Okeke home">
-        @if (!empty($home_page_data['header_logo']))
+         
             <img id="header-logo" class="admin-header-logo-img"
-                src="{{ asset('admin/assets/images/page/' . $home_page_data['header_logo']) }}"
+                src="{{ asset('/assets/website/images/logo.png') }}"
                 alt="Patrick Okeke">
-        @else
-            <span class="admin-header-logo-fallback">
-                <span class="admin-header__mark" aria-hidden="true">PO</span>
-                <span class="admin-header__name">Patrick Okeke</span>
-            </span>
-        @endif
+         
     </a>
     <nav class="navbar navbar-static-top">
 

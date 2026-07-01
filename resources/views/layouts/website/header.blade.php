@@ -10,9 +10,9 @@
 
 <header class="site-header" id="nav">
     <div class="site-header__inner">
-        <a href="{{ route('index') }}" class="site-logo">
-            <span class="site-logo__name">Patrick Okeke</span>
-            <span class="site-logo__tag">Author</span>
+        <a href="{{ route('index') }}">
+            <img src="{{ asset('public/admin/assets/images/page') }}/{{ $home_page_data['header_logo'] }}"
+                alt="logo" width="135" height="50" decoding="async">
         </a>
         <nav>
             <ul class="site-nav">
@@ -30,8 +30,9 @@
 
 <div class="mm" id="mm">
     <div class="mm-head">
-        <a href="{{ route('index') }}" class="site-logo">
-            <span class="site-logo__name">Patrick Okeke</span>
+        <a href="{{ route('index') }}">
+            <img src="{{ asset('public/admin/assets/images/page') }}/{{ $home_page_data['header_logo'] }}"
+                alt="logo" width="135" height="50" decoding="async">
         </a>
         <button type="button" class="mm-close" onclick="tmm()" aria-label="Close menu">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="M6 6l12 12"></path></svg>

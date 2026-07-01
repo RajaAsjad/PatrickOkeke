@@ -1,7 +1,7 @@
 <footer class="site-footer">
     <div class="site-footer__grid">
         <div data-anim="fade">
-            <p class="site-footer__brand">Patrick Okeke</p>
+            <img src="{{ asset('/assets/website/images/footer-logo.png') }}" alt="logo" width="200" height="60" decoding="async">
             <p class="site-footer__desc">Author of essays and books on culture, technology, and the craft of building a thinking life.</p>
         </div>
         <div data-anim="rise" data-delay="80">
