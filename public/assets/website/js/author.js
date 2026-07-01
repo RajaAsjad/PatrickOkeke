@@ -82,11 +82,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  document.querySelectorAll('.contact-form').forEach((form) => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      form.reset();
-      alert('Your letter has been sent. Thank you.');
-    });
-  });
 });

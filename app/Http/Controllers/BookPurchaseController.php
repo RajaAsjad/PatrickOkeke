@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookPurchaseMail;
 use App\Models\Book;
 use App\Models\BookOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Stripe\Checkout\Session;
 use Stripe\PaymentIntent;
@@ -136,9 +138,9 @@ class BookPurchaseController extends Controller
                 'status' => 'paid',
                 'download_token' => Str::random(64),
             ]);
+            $this->sendPurchaseNotification($order);
         } else {
-            $order->update([
-                'status' => 'paid',
+            $this->completeOrder($order, [
                 'amount_paid' => $intent->amount / 100,
                 'currency' => $intent->currency,
             ]);
@@ -186,9 +188,9 @@ class BookPurchaseController extends Controller
                 'status' => 'paid',
                 'download_token' => Str::random(64),
             ]);
+            $this->sendPurchaseNotification($order);
         } else {
-            $order->update([
-                'status' => 'paid',
+            $this->completeOrder($order, [
                 'stripe_payment_intent' => $session->payment_intent,
                 'amount_paid' => $session->amount_total / 100,
                 'currency' => $session->currency,
@@ -237,5 +239,37 @@ class BookPurchaseController extends Controller
     public function legacyDownloadRedirect($token)
     {
         return redirect()->route('book.download', ['token' => $token], 301);
+    }
+
+    private function completeOrder(BookOrder $order, array $attributes = []): BookOrder
+    {
+        $wasAlreadyPaid = $order->isPaid();
+
+        $order->fill(array_merge($attributes, ['status' => 'paid']));
+        $order->save();
+        $order->load('book');
+
+        if (! $wasAlreadyPaid) {
+            $this->sendPurchaseNotification($order);
+        }
+
+        return $order;
+    }
+
+    private function sendPurchaseNotification(BookOrder $order): void
+    {
+        $order->loadMissing('book');
+        $adminEmail = config('mail.from.address');
+
+        try {
+            Mail::to($adminEmail)->send(new BookPurchaseMail($order));
+            Log::info('Book purchase email sent to ' . $adminEmail, ['order_id' => $order->id]);
+        } catch (\Exception $e) {
+            Log::error('Book purchase email failed', [
+                'order_id' => $order->id,
+                'to' => $adminEmail,
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 }

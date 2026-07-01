@@ -41,7 +41,7 @@
                     <p><a href="tel:+12272560003">227 256 0003</a></p>
                 </div>
             </div>
-            <form class="contact-form" action="#" method="post" data-anim="blur" data-delay="150">
+            <form class="contact-form" id="contact-form" action="{{ route('contact.submit') }}" method="post" data-anim="blur" data-delay="150">
                 @csrf
                 <p class="eyebrow">Send a note</p>
                 <h2 class="display-h2" style="margin-top:12px;font-size:1.875rem">A short letter</h2>
@@ -62,10 +62,84 @@
                         <span>Message</span>
                         <textarea name="message" rows="6" required></textarea>
                     </label>
-                    <button type="submit" class="btn-primary">Send letter →</button>
+                    <button type="submit" class="btn-primary" id="contact-submit">Send letter →</button>
                 </div>
             </form>
         </div>
     </div>
 </section>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var btn = document.getElementById('contact-submit');
+        var originalText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            }
+        })
+        .then(function (response) {
+            return response.json().then(function (data) {
+                return { ok: response.ok, data: data };
+            });
+        })
+        .then(function (result) {
+            if (result.ok && result.data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Letter sent',
+                    text: result.data.message || 'Your letter has been sent. Thank you.',
+                    confirmButtonText: 'Close',
+                    confirmButtonColor: '#1a1a1a',
+                    timer: 6000,
+                    timerProgressBar: true
+                });
+                form.reset();
+                return;
+            }
+
+            var msg = result.data.message || 'Something went wrong. Please try again.';
+            if (result.data.errors) {
+                msg = Object.values(result.data.errors).flat().join(' ');
+            }
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Could not send',
+                text: msg,
+                confirmButtonText: 'Try again',
+                confirmButtonColor: '#1a1a1a'
+            });
+        })
+        .catch(function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Could not send',
+                text: 'Something went wrong. Please try again.',
+                confirmButtonText: 'Try again',
+                confirmButtonColor: '#1a1a1a'
+            });
+        })
+        .finally(function () {
+            btn.disabled = false;
+            btn.textContent = originalText;
+        });
+    });
+});
+</script>
+@endpush

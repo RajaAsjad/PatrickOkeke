@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactFormMail;
 use App\Models\Book;
+use App\Models\ContactUs;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class WebController extends Controller
 {
@@ -47,5 +52,65 @@ class WebController extends Controller
         $meta_description = 'Write to Patrick Okeke for reader letters, press, speaking and rights inquiries.';
 
         return view('website.contact', compact('page_title', 'meta_description'));
+    }
+
+    public function submitContact(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:200',
+            'email' => 'required|email|max:100',
+            'subject' => 'nullable|string|max:255',
+            'message' => 'required|string|max:2000',
+        ]);
+
+        $fullName = trim($request->name);
+        $parts = preg_split('/\s+/', $fullName, 2);
+        $firstName = $parts[0] ?? $fullName;
+        $lastName = $parts[1] ?? '';
+
+        $model = new ContactUs();
+        $model->first_name = $firstName;
+        $model->last_name = $lastName;
+        $model->email = $request->email;
+        $model->address = $request->subject;
+        $model->message = $request->message;
+        $model->save();
+
+        $contactData = [
+            'name' => $fullName,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ];
+
+        $adminEmail = config('mail.from.address');
+
+        try {
+            Mail::to($adminEmail)->send(new ContactFormMail($contactData));
+            Log::info('Contact form email sent to ' . $adminEmail);
+        } catch (\Exception $e) {
+            Log::error('Contact form email failed', [
+                'to' => $adminEmail,
+                'message' => $e->getMessage(),
+            ]);
+
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'We could not send your letter right now. Please try again shortly.',
+                ], 500);
+            }
+
+            return redirect()->back()->withErrors(['message' => 'We could not send your letter right now. Please try again shortly.']);
+        }
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Your letter has been sent. Thank you.',
+            ]);
+        }
+
+        return redirect()->back()->with('status', 'Your letter has been sent. Thank you.');
     }
 }
