@@ -19,7 +19,7 @@ class ContactFormMail extends Mailable
 
     public function build()
     {
-        $subject = 'New contact from Patrick Okeke website';
+        $subject = 'New contact from Baeze Publishing website';
         if (! empty($this->contact['subject'])) {
             $subject = 'Contact: ' . $this->contact['subject'];
         }

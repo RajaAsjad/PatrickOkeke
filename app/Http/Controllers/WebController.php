@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactFormMail;
+use App\Mail\NewsletterSubscribeMail;
 use App\Models\Book;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
@@ -83,7 +84,7 @@ class WebController extends Controller
             'message' => $request->message,
         ];
 
-        $adminEmail = config('mail.from.address');
+        $adminEmail = config('mail.admin.address');
 
         try {
             Mail::to($adminEmail)->send(new ContactFormMail($contactData));
@@ -112,5 +113,44 @@ class WebController extends Controller
         }
 
         return redirect()->back()->with('status', 'Your letter has been sent. Thank you.');
+    }
+
+    public function submitNewsletter(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|max:255',
+        ]);
+
+        $adminEmail = config('mail.admin.address');
+
+        try {
+            Mail::to($adminEmail)->send(new NewsletterSubscribeMail($request->email));
+            Log::info('Newsletter subscribe email sent to ' . $adminEmail, [
+                'subscriber' => $request->email,
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Newsletter subscribe email failed', [
+                'to' => $adminEmail,
+                'message' => $e->getMessage(),
+            ]);
+
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'We could not save your email right now. Please try again shortly.',
+                ], 500);
+            }
+
+            return redirect()->back()->withErrors(['email' => 'We could not save your email right now.']);
+        }
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Thank you. You are on the list.',
+            ]);
+        }
+
+        return redirect()->back()->with('status', 'Thank you. You are on the list.');
     }
 }

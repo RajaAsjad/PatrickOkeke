@@ -46,15 +46,14 @@ return [
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
+            'stream' => [
+                'ssl' => [
+                    'allow_self_signed' => true,
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                ],
+            ],
         ],
-
-		'stream' => [
-			'ssl' => [
-				'allow_self_signed' => true,
-				'verify_peer' => false,
-				'verify_peer_name' => false,
-			],
-		],
 
         'ses' => [
             'transport' => 'ses',
@@ -103,8 +102,22 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'softwaredeveloper992@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Chaff Mission'),
+        'address' => env('MAIL_FROM_ADDRESS', 'pokeke2025@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Baeze Publishing INC'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin / notification inbox
+    |--------------------------------------------------------------------------
+    |
+    | Contact, newsletter, and purchase notifications are sent here.
+    | Do not use mail.to — Laravel treats that as alwaysTo and hijacks all mail.
+    |
+    */
+    'admin' => [
+        'address' => env('MAIL_TO_ADDRESS', 'info@baeze.com'),
+        'name' => env('MAIL_TO_NAME', 'Baeze Publishing'),
     ],
 
     /*

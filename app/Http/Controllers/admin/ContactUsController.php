@@ -110,7 +110,7 @@ class ContactUsController extends Controller
         ];
 
         // Always send contact form notification to admin
-        $adminEmail = 'asjadmmc67@gmail.com';
+        $adminEmail = config('mail.admin.address');
         try {
             Mail::to($adminEmail)->send(new ContactFormMail($contactData));
             Log::info('Contact form email sent to ' . $adminEmail);

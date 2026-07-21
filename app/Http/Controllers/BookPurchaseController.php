@@ -259,7 +259,7 @@ class BookPurchaseController extends Controller
     private function sendPurchaseNotification(BookOrder $order): void
     {
         $order->loadMissing('book');
-        $adminEmail = config('mail.from.address');
+        $adminEmail = config('mail.admin.address');
 
         try {
             Mail::to($adminEmail)->send(new BookPurchaseMail($order));

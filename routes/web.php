@@ -55,6 +55,7 @@ Route::post('books/{slug}/payment-intent', [BookPurchaseController::class, 'paym
 Route::get('books/{slug}', [WebController::class, 'BookShow'])->name('books.show');
 Route::get('contact', [WebController::class, 'Contact'])->name('contact');
 Route::post('contact', [WebController::class, 'submitContact'])->name('contact.submit');
+Route::post('newsletter', [WebController::class, 'submitNewsletter'])->name('newsletter.submit');
 
 
 // Redirect /login to admin login (session expired or user types /login in URL)

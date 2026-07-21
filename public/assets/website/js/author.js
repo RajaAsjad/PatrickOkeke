@@ -76,10 +76,75 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.newsletter-form').forEach((form) => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const input = form.querySelector('input[type="email"]');
-      if (input) input.value = '';
-      alert('Thank you. You are on the list.');
+
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn ? btn.textContent : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+      }
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          Accept: 'application/json',
+        },
+      })
+        .then((response) =>
+          response.json().then((data) => ({ ok: response.ok, data }))
+        )
+        .then((result) => {
+          if (result.ok && result.data.success) {
+            if (typeof Swal !== 'undefined') {
+              Swal.fire({
+                icon: 'success',
+                title: 'You are on the list',
+                text: result.data.message || 'Thank you. You are on the list.',
+                confirmButtonText: 'Close',
+                confirmButtonColor: '#1a1a1a',
+                timer: 5000,
+                timerProgressBar: true,
+              });
+            }
+            form.reset();
+            return;
+          }
+
+          const msg =
+            result.data.message ||
+            (result.data.errors
+              ? Object.values(result.data.errors).flat().join(' ')
+              : 'Something went wrong. Please try again.');
+
+          if (typeof Swal !== 'undefined') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Could not subscribe',
+              text: msg,
+              confirmButtonText: 'Try again',
+              confirmButtonColor: '#1a1a1a',
+            });
+          }
+        })
+        .catch(() => {
+          if (typeof Swal !== 'undefined') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Could not subscribe',
+              text: 'Something went wrong. Please try again.',
+              confirmButtonText: 'Try again',
+              confirmButtonColor: '#1a1a1a',
+            });
+          }
+        })
+        .finally(() => {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = originalText;
+          }
+        });
     });
   });
-
 });
